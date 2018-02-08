@@ -1,21 +1,50 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- <router-outlet></router-outlet> -->
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>ARC TI-RADS</span>
+    <!-- <span class="example-spacer"></span>
+    <button mat-button>About</button>
+    <button mat-button>Services</button>
+    <button mat-button>Contact</button> -->
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-card>
+  <div *ngFor="let characteristic of tiRad.characteristics" [ngClass]="{'hidden': characteristic.hidden }">
+    <!-- <span>{{characteristic.description}}</span> -->
 
-<router-outlet></router-outlet>
+<!-- *ngIf="characteristic.type == 'checkbox'" -->
+
+    <mat-selection-list *ngIf="characteristic.type == 'checkbox'">
+      <mat-list-option (selectionChange)="addPoints($event, characteristic, option)" *ngFor="let option of characteristic.options">
+        {{option.description}}: {{option.points}}
+      </mat-list-option>
+    </mat-selection-list>
+    <mat-list *ngIf="characteristic.type == 'radio'">
+        <mat-list-item *ngFor="let option of characteristic.options">
+          <mat-radio-button [name]="characteristic.description" (change)="addPoints($event, characteristic, option)">{{option.description}}: {{option.points}}</mat-radio-button>
+        </mat-list-item>
+    </mat-list>
+
+    <!-- <ul class="form-list">
+      <li *ngFor="let option of characteristic.options">
+        <mat-checkbox (ngModel)="option.points" (change)="addPoints($event, characteristic, option)">
+          <span [ngClass]="{'hover-note': option.note}">{{option.description}}: {{option.points}}</span>
+          <span *ngIf="option.note" class="hover-content" [innerHTML]="option.note"></span>
+        </mat-checkbox> -->
+        <!-- <label [ngClass]="{'hover-note': option.note}">{{option.description}}: {{option.points}}
+          <span *ngIf="option.note" class="hover-content" [innerHTML]="option.note"></span>
+          <input class="hidden" type="{{characteristic.type}}" name={{characteristic.description}} (ngModel)="option.points" (change)="addPoints($event, characteristic, option)">
+        </label> -->
+      <!-- </li>
+    </ul> -->
+  </div>
+  <button mat-fab (click)="move(-1);" [disabled]="index == 0">
+    <i class="material-icons">keyboard_arrow_left</i>
+  </button>
+  <button mat-fab (click)="move(1);" [disabled]="index == tiRad.characteristics.length-1">
+    <i class="material-icons">keyboard_arrow_right</i>
+  </button>
+</mat-card>
+<mat-card>
+Points: {{pointsTotal}}
+</mat-card>
