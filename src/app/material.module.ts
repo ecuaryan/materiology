@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule,
+import {
+  MatButtonModule,
   MatToolbarModule,
   MatInputModule,
   MatProgressSpinnerModule,
@@ -8,7 +9,9 @@ import { MatButtonModule,
   MatCheckboxModule,
   MatListModule,
   MatRadioModule,
-  MatButtonModule
+  MatButtonModule,
+  MatTabsModule,
+  MatTooltipModule
 } from '@angular/material';
 
 let importExports = [
@@ -20,7 +23,9 @@ let importExports = [
   MatCheckboxModule,
   MatListModule,
   MatRadioModule,
-  MatButtonModule
+  MatButtonModule,
+  MatTabsModule,
+  MatTooltipModule
 ];
 
 @NgModule({

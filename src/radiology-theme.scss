@@ -15,3 +15,11 @@ $radiology-theme: mat-dark-theme(
 html{
   background: black;
 }
+
+.accent-text{
+  color: mat-color($my-theme-accent);
+}
+
+.mat-tooltip{
+  font-size: 18px;
+}

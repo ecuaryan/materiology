@@ -16,9 +16,34 @@
   @include angular-material-theme($radiology-theme);
 }
 
+body{
+  margin: 0;
+}
+
 .hidden{
   display: none;
 }
+
+.app-toolbar {
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+ul{
+  overflow: hidden;
+  padding-left: 20px;
+}
+
+$li-padding-top-bottom: 12px;
+
+li{
+  list-style-type: none;
+  padding-top: $li-padding-top-bottom;
+  padding-bottom: $li-padding-top-bottom;
+}
+
 
 // button[mat-fab]{
 //   font-size: 25px;
@@ -26,15 +51,15 @@
 
 
 /* Rules for sizing the icon. */
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
-
-/* Rules for using icons as black on a light background. */
-.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
-.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
-
-/* Rules for using icons as white on a dark background. */
-.material-icons.md-light { color: rgba(255, 255, 255, 1); }
-.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+// .material-icons.md-18 { font-size: 18px; }
+// .material-icons.md-24 { font-size: 24px; }
+// .material-icons.md-36 { font-size: 36px; }
+// .material-icons.md-48 { font-size: 48px; }
+//
+// /* Rules for using icons as black on a light background. */
+// .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+// .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+//
+// /* Rules for using icons as white on a dark background. */
+// .material-icons.md-light { color: rgba(255, 255, 255, 1); }
+// .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }

@@ -1,7 +1,10 @@
 <!-- <router-outlet></router-outlet> -->
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="mat-elevation-z6 app-toolbar">
   <mat-toolbar-row>
-    <span>ARC TI-RADS</span>
+    <button mat-icon-button>
+      <i class="material-icons">menu</i>
+    </button>
+    <button mat-button>ARC TI-RADS</button>
     <!-- <span class="example-spacer"></span>
     <button mat-button>About</button>
     <button mat-button>Services</button>
@@ -9,12 +12,45 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-card>
-  <div *ngFor="let characteristic of tiRad.characteristics" [ngClass]="{'hidden': characteristic.hidden }">
+  <mat-card-title class="accent-text">ARC TI-RADS</mat-card-title>
+  <!-- <mat-card-subtitle>blah</mat-card-subtitle> -->
+  <mat-tab-group #matTabGroup [dynamicHeight]="true">
+  <mat-tab *ngFor="let characteristic of tiRad.characteristics">
+    <ng-template mat-tab-label>
+      <span *ngIf="!selectedCharacteristicPointMap[characteristic.description] && selectedCharacteristicPointMap[characteristic.description] != 0">(-)&nbsp;</span>
+      <span class="accent-text" *ngIf="selectedCharacteristicPointMap[characteristic.description] || selectedCharacteristicPointMap[characteristic.description] === 0">({{selectedCharacteristicPointMap[characteristic.description]}})&nbsp;</span>
+      <span>{{characteristic.description}}</span>
+      </ng-template>
+    <div *ngIf="characteristic.type == 'checkbox'">
+      <p class="accent-text">select all that apply</p>
+      <mat-divider></mat-divider>
+      <ul>
+        <li *ngFor="let option of characteristic.options">
+          <!-- <mat-selection-list>
+            <mat-list-item *ngFor="let option of characteristic.options"> -->
+              <mat-checkbox [matTooltip]="option.note" matTooltipPosition="right" (change)="addPoints($event, characteristic, option)">({{option.points}}) {{option.description}}</mat-checkbox>
+            <!-- </mat-list-item>
+          </mat-selection-list> -->
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="characteristic.type == 'radio'">
+      <p class="accent-text">select one</p>
+      <mat-divider></mat-divider>
+      <mat-list>
+          <mat-list-item *ngFor="let option of characteristic.options">
+            <mat-radio-button [matTooltip]="option.note" matTooltipPosition="right" [name]="characteristic.description" (change)="addPoints($event, characteristic, option)">({{option.points}}) {{option.description}}</mat-radio-button>
+          </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+  <!-- <div *ngFor="let characteristic of tiRad.characteristics" [ngClass]="{'hidden': characteristic.hidden }"> -->
     <!-- <span>{{characteristic.description}}</span> -->
 
 <!-- *ngIf="characteristic.type == 'checkbox'" -->
 
-    <mat-selection-list *ngIf="characteristic.type == 'checkbox'">
+    <!-- <mat-selection-list *ngIf="characteristic.type == 'checkbox'">
       <mat-list-option (selectionChange)="addPoints($event, characteristic, option)" *ngFor="let option of characteristic.options">
         {{option.description}}: {{option.points}}
       </mat-list-option>
@@ -23,7 +59,7 @@
         <mat-list-item *ngFor="let option of characteristic.options">
           <mat-radio-button [name]="characteristic.description" (change)="addPoints($event, characteristic, option)">{{option.description}}: {{option.points}}</mat-radio-button>
         </mat-list-item>
-    </mat-list>
+    </mat-list> -->
 
     <!-- <ul class="form-list">
       <li *ngFor="let option of characteristic.options">
@@ -37,14 +73,23 @@
         </label> -->
       <!-- </li>
     </ul> -->
-  </div>
-  <button mat-fab (click)="move(-1);" [disabled]="index == 0">
+  <!-- </div> -->
+  <!-- <button mat-fab (click)="move(-1);" [disabled]="index == 0">
     <i class="material-icons">keyboard_arrow_left</i>
   </button>
   <button mat-fab (click)="move(1);" [disabled]="index == tiRad.characteristics.length-1">
     <i class="material-icons">keyboard_arrow_right</i>
-  </button>
+  </button> -->
+  <!-- <span>Points: {{pointsTotal}}</span>
+  <span>Recommendation: {{outcome.prognosis}}</span> -->
+
 </mat-card>
 <mat-card>
-Points: {{pointsTotal}}
+  <mat-card-title class="accent-text">
+    <span *ngIf="!isEmpty(selectedCharacteristicPointMap)">({{pointsTotal}})</span>
+    <span>{{outcome.prognosis}}</span>
+  </mat-card-title>
+  <mat-card-content class="accent-text">
+    <div *ngFor="let note of outcome.notes" [innerHTML]="note"></div>
+  </mat-card-content>
 </mat-card>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,29 +8,41 @@ import { Component } from '@angular/core';
 export class AppComponent {
   pointsTotal = 0;
   selectedCharacteristicPointMap = {};
-  index = 0;
+  tabIndex = 0;
   outcome: any = {};
+
+  @ViewChild('matTabGroup') tabGroup;
 
   addPoints = function(event, characteristic, option) {
     if(option.break){
       alert("we're done here folks, it's all spongy and therefore BENIGN.");
     } else {
       if (characteristic.type === 'checkbox') {
-        if (event.source.selected) { //event.srcElement.checked before material theme stuff
-          this.selectedCharacteristicPointMap[characteristic.description + ' - ' + option.description] = option.points;
+        if (event.source.checked) { //event.srcElement.checked before material theme stuff
+          if(!this.selectedCharacteristicPointMap[characteristic.description]){
+            this.selectedCharacteristicPointMap[characteristic.description] = 0;
+          }
+          this.selectedCharacteristicPointMap[characteristic.description] += option.points;// = option.points;
         } else {
-          delete this.selectedCharacteristicPointMap[characteristic.description + ' - ' + option.description];
+          this.selectedCharacteristicPointMap[characteristic.description] -= option.points;
+          if(this.selectedCharacteristicPointMap[characteristic.description] === 0){
+            delete this.selectedCharacteristicPointMap[characteristic.description];
+          }
+          // delete this.selectedCharacteristicPointMap[characteristic.description + ' - ' + option.description];
         }
       } else {
         this.selectedCharacteristicPointMap[characteristic.description] = option.points;
 
-        let notOnLastCharacteristic = this.index < this.tiRad.characteristics.length - 1;
-        if(notOnLastCharacteristic){
-          setTimeout(() => {
-            this.move(1);
-          }, 500)
-        }
+        // let notOnLastCharacteristic = this.tabIndex < this.tiRad.characteristics.length - 1;
+        // if(notOnLastCharacteristic){
+        //     // this.move(1);
+        //     // this.tabIndex ++;
+        // }
+
+        this.tabGroup.selectedIndex ++;
       }
+
+      console.log(this.selectedCharacteristicPointMap);
 
       this.pointsTotal = 0;
       for (const key in this.selectedCharacteristicPointMap ) {
@@ -42,6 +54,11 @@ export class AppComponent {
       this.calculateOutcome();
     }
   };
+
+  // onTabChange(i){
+  //   console.log(i);
+  //   console.log(this.matTabGroup);
+  // }
 
   calculateOutcome (){
     if(this.pointsTotal < 2){
@@ -57,10 +74,18 @@ export class AppComponent {
     }
   }
 
+  isEmpty (obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+  }
+
   move = function (direction){
-    this.tiRad.characteristics[this.index].hidden = true;
-    this.index += direction;
-    this.tiRad.characteristics[this.index].hidden = false;
+    // this.tiRad.characteristics[this.tabIndex].hidden = true;
+    this.tabIndex += direction;
+    // this.tiRad.characteristics[this.tabIndex].hidden = false;
   }
   // tslint:disable-next-line:member-ordering
   tiRad = {
@@ -68,7 +93,7 @@ export class AppComponent {
     'description': 'ARC TI-RADS',
     'characteristics': [
       {
-        'hidden': false,
+        // 'hidden': false,
         'description': 'Composition',
         'type': 'radio',
         'options': [
@@ -98,7 +123,7 @@ export class AppComponent {
         ]
       },
       {
-        'hidden': true,
+        // 'hidden': true,
         'description': 'Echogenicity',
         'type': 'radio',
         'options': [
@@ -113,12 +138,12 @@ export class AppComponent {
             'points': 1
           },
           {
-            'description': 'Hypoechoic',
-            'note': 'Very hypoechoic: More hypoechoic than strap muscles.',
+            'description': 'Hypoechoic'
             'points': 2
           },
           {
             'description': 'Very hypoechoic',
+            'note': 'Very hypoechoic: More hypoechoic than strap muscles.',
             'points': 3
           },
           {
@@ -128,7 +153,7 @@ export class AppComponent {
         ]
       },
       {
-        'hidden': true,
+        // 'hidden': true,
         'description': 'Shape',
         'type': 'radio',
         'options': [
@@ -144,7 +169,7 @@ export class AppComponent {
         ]
       },
       {
-        'hidden': true,
+        // 'hidden': true,
         'description': 'Margin',
         'type': 'radio',
         'options': [
@@ -173,7 +198,7 @@ export class AppComponent {
         ]
       },
       {
-        'hidden': true,
+        // 'hidden': true,
         'description': 'Echogenic Foci',
         'type': 'checkbox',
         'options': [
