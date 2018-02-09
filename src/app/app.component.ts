@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,16 @@ export class AppComponent {
   outcome: any = {};
 
   @ViewChild('matTabGroup') tabGroup;
+  @ViewChild('myForm') myForm;
+
+
+  myValue = 'blah';
+  // @ViewChild('aform') aform;
+
+  // aform = new FormGroup({
+  //   first: new FormControl('Nancy', Validators.minLength(2)),
+  //   last: new FormControl('Drew'),
+  // });
 
   addPoints = function(event, characteristic, option) {
     if(option.break){
@@ -25,9 +36,9 @@ export class AppComponent {
           this.selectedCharacteristicPointMap[characteristic.description] += option.points;// = option.points;
         } else {
           this.selectedCharacteristicPointMap[characteristic.description] -= option.points;
-          if(this.selectedCharacteristicPointMap[characteristic.description] === 0){
-            delete this.selectedCharacteristicPointMap[characteristic.description];
-          }
+          // if(this.selectedCharacteristicPointMap[characteristic.description] === 0){
+          //   delete this.selectedCharacteristicPointMap[characteristic.description];
+          // }
           // delete this.selectedCharacteristicPointMap[characteristic.description + ' - ' + option.description];
         }
       } else {
@@ -54,6 +65,20 @@ export class AppComponent {
       this.calculateOutcome();
     }
   };
+
+  reset(){
+
+    location.reload();
+
+    // this.selectedCharacteristicPointMap = {};
+    // this.outcome = {};
+    // debugger;
+    // this.myForm.resetForm();
+    // console.log(this.myForm.controls);
+    //
+    // this.myForm.reset();
+    // this.myForm.resetForm();
+  }
 
   // onTabChange(i){
   //   console.log(i);
