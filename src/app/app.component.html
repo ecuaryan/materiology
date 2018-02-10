@@ -46,8 +46,7 @@
   </mat-tab-group>
   <mat-card class="mat-elevation-z24" *ngIf="!isEmpty(selectedCharacteristicPointMap)">
     <mat-card-title class="accent-text">
-      <span>({{pointsTotal}})</span>
-      <span>{{outcome.recommendation}}</span>
+      <span>{{pointsTotal}} Points - {{outcome.description}}: {{outcome.recommendation}}</span>
     </mat-card-title>
     <mat-card-content class="accent-text">
       <div *ngFor="let note of outcome.notes" [innerHTML]="note"></div>
