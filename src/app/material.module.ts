@@ -9,9 +9,9 @@ import {
   MatCheckboxModule,
   MatListModule,
   MatRadioModule,
-  MatButtonModule,
   MatTabsModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 let importExports = [
@@ -23,9 +23,9 @@ let importExports = [
   MatCheckboxModule,
   MatListModule,
   MatRadioModule,
-  MatButtonModule,
   MatTabsModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSnackBarModule
 ];
 
 @NgModule({

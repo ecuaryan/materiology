@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -11,63 +11,52 @@ export class AppComponent {
   selectedCharacteristicPointMap = {};
   tabIndex = 0;
   outcome: any = {};
-
   @ViewChild('matTabGroup') tabGroup;
-  @ViewChild('myForm') myForm;
 
+  constructor(public snackBar: MatSnackBar) {}
 
-  myValue = 'blah';
-  // @ViewChild('aform') aform;
-
-  // aform = new FormGroup({
-  //   first: new FormControl('Nancy', Validators.minLength(2)),
-  //   last: new FormControl('Drew'),
-  // });
-
-  addPoints = function(event, characteristic, option) {
-    if(option.break){
-      alert("we're done here folks, it's all spongy and therefore BENIGN.");
-    } else {
+  onInputButtonChange = function(event, characteristic, option) {
       if (characteristic.type === 'checkbox') {
-        if (event.source.checked) { //event.srcElement.checked before material theme stuff
+        if (event.source.checked) {
           if(!this.selectedCharacteristicPointMap[characteristic.description]){
             this.selectedCharacteristicPointMap[characteristic.description] = 0;
           }
-          this.selectedCharacteristicPointMap[characteristic.description] += option.points;// = option.points;
+          this.selectedCharacteristicPointMap[characteristic.description] += option.points;
         } else {
           this.selectedCharacteristicPointMap[characteristic.description] -= option.points;
-          // if(this.selectedCharacteristicPointMap[characteristic.description] === 0){
-          //   delete this.selectedCharacteristicPointMap[characteristic.description];
-          // }
-          // delete this.selectedCharacteristicPointMap[characteristic.description + ' - ' + option.description];
         }
       } else {
         this.selectedCharacteristicPointMap[characteristic.description] = option.points;
-
-        // let notOnLastCharacteristic = this.tabIndex < this.tiRad.characteristics.length - 1;
-        // if(notOnLastCharacteristic){
-        //     // this.move(1);
-        //     // this.tabIndex ++;
-        // }
-
         this.tabGroup.selectedIndex ++;
       }
 
-      console.log(this.selectedCharacteristicPointMap);
-
-      this.pointsTotal = 0;
-      for (const key in this.selectedCharacteristicPointMap ) {
-        if (this.selectedCharacteristicPointMap.hasOwnProperty(key)) {
-          this.pointsTotal += this.selectedCharacteristicPointMap[key];
-        }
-      }
-
+      this.addUpPoints();
       this.calculateOutcome();
-    }
+      this.checkForBreak(option);
   };
 
-  reset(){
+  checkForBreak(option){
+    if(option.break){
+      let message = option.breakReason ? option.breakReason: option.note;
+      let snackBarRef = this.snackBar.open(message, 'reset');
 
+      snackBarRef.onAction().subscribe(() => {
+        this.reset();
+      });
+    }
+  }
+
+  addUpPoints(){
+    this.pointsTotal = 0;
+    for (const key in this.selectedCharacteristicPointMap ) {
+      if (this.selectedCharacteristicPointMap.hasOwnProperty(key)) {
+        this.pointsTotal += this.selectedCharacteristicPointMap[key];
+      }
+    }
+  }
+
+  reset(){
+    // debugger;
     location.reload();
 
     // this.selectedCharacteristicPointMap = {};
@@ -159,11 +148,11 @@ export class AppComponent {
           },
           {
             'description': 'Hyperechoic or isoechoic',
-            'note': 'Hyperechoic/isoechoic/hypoechoic: Compared to adjacent parenchyma.',
+            'note': 'Hyperechoic /isoechoic /hypoechoic: Compared to adjacent parenchyma.',
             'points': 1
           },
           {
-            'description': 'Hypoechoic'
+            'description': 'Hypoechoic',
             'points': 2
           },
           {
@@ -208,7 +197,7 @@ export class AppComponent {
           },
           {
             'description': 'Lobulated or irregular',
-            'note': 'Lobulated: Protrusions into adjacent tissue.<br>Irregular: Jagged, spiculated, or sharp angles.',
+            'note': 'Lobulated: Protrusions into adjacent tissue. Irregular: Jagged, spiculated, or sharp angles.',
             'points': 2
           },
           {

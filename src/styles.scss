@@ -44,6 +44,19 @@ li{
   padding-bottom: $li-padding-top-bottom;
 }
 
+.reset-button.mat-fab{
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.tool-tip-indicator {
+  .mat-radio-label-content,
+  .mat-checkbox-label{
+    text-decoration: underline;
+    text-decoration-color: mat-color($my-theme-accent);
+  }
+}
 
 // button[mat-fab]{
 //   font-size: 25px;
