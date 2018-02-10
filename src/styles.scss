@@ -20,6 +20,10 @@ body{
   margin: 0;
 }
 
+.push-right{
+  margin-right: 35px;
+}
+
 .muted-text{
   color: grey !important;
 }
@@ -65,5 +69,5 @@ li{
 button.copy-outcome{
   position: absolute;
   right: 15px;
-  top: 15px;
+  bottom: 15px;
 }
