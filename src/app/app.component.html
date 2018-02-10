@@ -55,3 +55,13 @@
     <button class="copy-outcome" mat-raised-button (click)="copyOutcomeToClipboard()">copy</button>
   </mat-card>
 </mat-card>
+<mat-card class="text-center muted-text">
+  <span>Made with</span>
+  <button mat-icon-button color="accent">
+    <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+  </button>
+  <span> by </span>
+  <a href="https://www.linkedin.com/in/ryan-willmore" class="muted-text" target="_blank">Ryan Willmore</a>
+  <span> | </span>
+  <a href="#" class="muted-text" (click)="snackBar.open('No funny business!', 'ok')">Terms</a>
+</mat-card>

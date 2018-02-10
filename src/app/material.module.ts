@@ -11,7 +11,8 @@ import {
   MatRadioModule,
   MatTabsModule,
   MatTooltipModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatIconModule,
 } from '@angular/material';
 
 let importExports = [
@@ -25,7 +26,8 @@ let importExports = [
   MatRadioModule,
   MatTabsModule,
   MatTooltipModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatIconModule,
 ];
 
 @NgModule({
