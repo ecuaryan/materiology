@@ -14,7 +14,7 @@
 <mat-card>
   <button class="reset-button" mat-fab [disabled]="isEmpty(selectedCharacteristicPointMap)" (click)="reset()">reset</button>
     <mat-card-title class="accent-text">ARC TI-RADS</mat-card-title>
-    <!-- <mat-card-subtitle>blah</mat-card-subtitle> -->
+    <mat-card-subtitle>Fill out the form for all categories to determine the TI-RADS level.</mat-card-subtitle>
     <mat-tab-group #matTabGroup [dynamicHeight]="true">
     <mat-tab *ngFor="let characteristic of tiRad.characteristics">
       <ng-template mat-tab-label>
