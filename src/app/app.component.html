@@ -12,11 +12,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-card>
-  <button class="reset-button" mat-fab [disabled]="false" (click)="reset()">RESET</button>
-  <!-- <form #aform="ngForm">
-    <input type="text" name="first" ngModel>
-  </form> -->
-  <!-- <form #myForm="ngForm"> -->
+  <button class="reset-button" mat-fab [disabled]="isEmpty(selectedCharacteristicPointMap)" (click)="reset()">reset</button>
     <mat-card-title class="accent-text">ARC TI-RADS</mat-card-title>
     <!-- <mat-card-subtitle>blah</mat-card-subtitle> -->
     <mat-tab-group #matTabGroup [dynamicHeight]="true">
@@ -31,11 +27,7 @@
         <mat-divider></mat-divider>
         <ul>
           <li *ngFor="let option of characteristic.options">
-            <!-- <mat-selection-list>
-              <mat-list-item *ngFor="let option of characteristic.options"> -->
-                <mat-checkbox [ngClass]="{'tool-tip-indicator': option.note}" ngModel [name]="option.description" style="text-decoration: dotted;" [matTooltip]="option.note" matTooltipPosition="right" (change)="onInputButtonChange($event, characteristic, option)">({{option.points}}) {{option.description}}</mat-checkbox>
-              <!-- </mat-list-item>
-            </mat-selection-list> -->
+            <mat-checkbox [ngClass]="{'tool-tip-indicator': option.note}" ngModel [name]="option.description" style="text-decoration: dotted;" [matTooltip]="option.note" matTooltipPosition="right" (change)="onInputButtonChange($event, characteristic, option)">({{option.points}}) {{option.description}}</mat-checkbox>
           </li>
         </ul>
       </div>
@@ -45,61 +37,21 @@
         <mat-list>
           <mat-radio-group ngModel [name]="characteristic.description" >
             <mat-list-item *ngFor="let option of characteristic.options">
-<!-- <mat-radio-group ngModel [name]="characteristic.description" [selected]="false"> -->
-                <mat-radio-button [ngClass]="{'tool-tip-indicator': option.note}" [matTooltip]="option.note" matTooltipPosition="right" (change)="onInputButtonChange($event, characteristic, option)">({{option.points}}) {{option.description}}</mat-radio-button>
-<!-- </mat-radio-group> -->
+              <mat-radio-button [ngClass]="{'tool-tip-indicator': option.note}" [matTooltip]="option.note" matTooltipPosition="right" (change)="onInputButtonChange($event, characteristic, option)">({{option.points}}) {{option.description}}</mat-radio-button>
             </mat-list-item>
-            </mat-radio-group>
+          </mat-radio-group>
         </mat-list>
       </div>
     </mat-tab>
   </mat-tab-group>
-<!-- </form> -->
-  <!-- <div *ngFor="let characteristic of tiRad.characteristics" [ngClass]="{'hidden': characteristic.hidden }"> -->
-    <!-- <span>{{characteristic.description}}</span> -->
-
-<!-- *ngIf="characteristic.type == 'checkbox'" -->
-
-    <!-- <mat-selection-list *ngIf="characteristic.type == 'checkbox'">
-      <mat-list-option (selectionChange)="addPoints($event, characteristic, option)" *ngFor="let option of characteristic.options">
-        {{option.description}}: {{option.points}}
-      </mat-list-option>
-    </mat-selection-list>
-    <mat-list *ngIf="characteristic.type == 'radio'">
-        <mat-list-item *ngFor="let option of characteristic.options">
-          <mat-radio-button [name]="characteristic.description" (change)="addPoints($event, characteristic, option)">{{option.description}}: {{option.points}}</mat-radio-button>
-        </mat-list-item>
-    </mat-list> -->
-
-    <!-- <ul class="form-list">
-      <li *ngFor="let option of characteristic.options">
-        <mat-checkbox (ngModel)="option.points" (change)="addPoints($event, characteristic, option)">
-          <span [ngClass]="{'hover-note': option.note}">{{option.description}}: {{option.points}}</span>
-          <span *ngIf="option.note" class="hover-content" [innerHTML]="option.note"></span>
-        </mat-checkbox> -->
-        <!-- <label [ngClass]="{'hover-note': option.note}">{{option.description}}: {{option.points}}
-          <span *ngIf="option.note" class="hover-content" [innerHTML]="option.note"></span>
-          <input class="hidden" type="{{characteristic.type}}" name={{characteristic.description}} (ngModel)="option.points" (change)="addPoints($event, characteristic, option)">
-        </label> -->
-      <!-- </li>
-    </ul> -->
-  <!-- </div> -->
-  <!-- <button mat-fab (click)="move(-1);" [disabled]="index == 0">
-    <i class="material-icons">keyboard_arrow_left</i>
-  </button>
-  <button mat-fab (click)="move(1);" [disabled]="index == tiRad.characteristics.length-1">
-    <i class="material-icons">keyboard_arrow_right</i>
-  </button> -->
-  <!-- <span>Points: {{pointsTotal}}</span>
-  <span>Recommendation: {{outcome.prognosis}}</span> -->
-  <mat-card>
+  <mat-card class="mat-elevation-z24" *ngIf="!isEmpty(selectedCharacteristicPointMap)">
     <mat-card-title class="accent-text">
-      <span *ngIf="!isEmpty(selectedCharacteristicPointMap)">({{pointsTotal}})</span>
-      <span>{{outcome.prognosis}}</span>
+      <span>({{pointsTotal}})</span>
+      <span>{{outcome.recommendation}}</span>
     </mat-card-title>
     <mat-card-content class="accent-text">
       <div *ngFor="let note of outcome.notes" [innerHTML]="note"></div>
     </mat-card-content>
+    <button class="copy-outcome" mat-raised-button (click)="copyOutcomeToClipboard()">copy</button>
   </mat-card>
-  <!-- <pre>blah: {{myform | json}}</pre> -->
 </mat-card>

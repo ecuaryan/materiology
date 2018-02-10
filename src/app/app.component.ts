@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,6 @@ import {MatSnackBar} from '@angular/material';
 export class AppComponent {
   pointsTotal = 0;
   selectedCharacteristicPointMap = {};
-  tabIndex = 0;
   outcome: any = {};
   @ViewChild('matTabGroup') tabGroup;
 
@@ -35,14 +34,82 @@ export class AppComponent {
       this.checkForBreak(option);
   };
 
+  copyOutcomeToClipboard(){
+    let text = this.outcome.recommendation;
+
+    if(this.outcome.notes){
+      for(let i = 0; i < this.outcome.notes.length; i++){
+        text += '\r\n' + this.outcome.notes[i];
+      }
+    }
+
+    this.copyTextToClipboard(text);
+  }
+
+  copyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+
+    //
+    // *** This styling is an extra step which is likely not required. ***
+    //
+    // Why is it here? To ensure:
+    // 1. the element is able to have focus and selection.
+    // 2. if element was to flash render it has minimal visual impact.
+    // 3. less flakyness with selection and copying which **might** occur if
+    //    the textarea element is not visible.
+    //
+    // The likelihood is the element won't even render, not even a flash,
+    // so some of these are just precautions. However in IE the element
+    // is visible whilst the popup box asking the user for permission for
+    // the web page to copy to the clipboard.
+    //
+
+    // Place in top-left corner of screen regardless of scroll position.
+    textArea.style.position = 'fixed';
+    textArea.style.top = 0;
+    textArea.style.left = 0;
+
+    // Ensure it has a small width and height. Setting to 1px / 1em
+    // doesn't work as this gives a negative w/h on some browsers.
+    textArea.style.width = '2em';
+    textArea.style.height = '2em';
+
+    // We don't need padding, reducing the size if it does flash render.
+    textArea.style.padding = 0;
+
+    // Clean up any borders.
+    textArea.style.border = 'none';
+    textArea.style.outline = 'none';
+    textArea.style.boxShadow = 'none';
+
+    // Avoid flash of white box if rendered for any reason.
+    textArea.style.background = 'transparent';
+
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+
+    try {
+      var successful = document.execCommand('copy');
+      var msg = successful ? 'successful' : 'unsuccessful';
+      let snackBarRef = this.snackBar.open('Copied: ' + text, 'ok', {duration: 10000});
+    } catch (err) {
+      console.error(err.toString());
+      let snackBarRef = this.snackBar.open('Unable to copy, sorry bro!', 'ok', {duration: 2000});
+    }
+
+    document.body.removeChild(textArea);
+  }
+
   checkForBreak(option){
     if(option.break){
       let message = option.breakReason ? option.breakReason: option.note;
       let snackBarRef = this.snackBar.open(message, 'reset');
-
       snackBarRef.onAction().subscribe(() => {
         this.reset();
       });
+
+      this.calculateOutcome(option.points);
     }
   }
 
@@ -56,25 +123,13 @@ export class AppComponent {
   }
 
   reset(){
-    // debugger;
     location.reload();
-
-    // this.selectedCharacteristicPointMap = {};
-    // this.outcome = {};
-    // debugger;
-    // this.myForm.resetForm();
-    // console.log(this.myForm.controls);
-    //
-    // this.myForm.reset();
-    // this.myForm.resetForm();
   }
 
-  // onTabChange(i){
-  //   console.log(i);
-  //   console.log(this.matTabGroup);
-  // }
-
-  calculateOutcome (){
+  calculateOutcome (points = null){
+    if(points !=null){
+      this.pointsTotal = points;
+    }
     if(this.pointsTotal < 2){
       this.outcome = this.tiRadLevelOutcome.TR1;
     } else if (this.pointsTotal < 3){
@@ -96,18 +151,12 @@ export class AppComponent {
     return true;
   }
 
-  move = function (direction){
-    // this.tiRad.characteristics[this.tabIndex].hidden = true;
-    this.tabIndex += direction;
-    // this.tiRad.characteristics[this.tabIndex].hidden = false;
-  }
   // tslint:disable-next-line:member-ordering
   tiRad = {
     'id': 1,
     'description': 'ARC TI-RADS',
     'characteristics': [
       {
-        // 'hidden': false,
         'description': 'Composition',
         'type': 'radio',
         'options': [
@@ -137,7 +186,6 @@ export class AppComponent {
         ]
       },
       {
-        // 'hidden': true,
         'description': 'Echogenicity',
         'type': 'radio',
         'options': [
@@ -148,7 +196,7 @@ export class AppComponent {
           },
           {
             'description': 'Hyperechoic or isoechoic',
-            'note': 'Hyperechoic /isoechoic /hypoechoic: Compared to adjacent parenchyma.',
+            'note': 'Hyperechoic / isoechoic / hypoechoic: Compared to adjacent parenchyma.',
             'points': 1
           },
           {
@@ -167,7 +215,6 @@ export class AppComponent {
         ]
       },
       {
-        // 'hidden': true,
         'description': 'Shape',
         'type': 'radio',
         'options': [
@@ -183,7 +230,6 @@ export class AppComponent {
         ]
       },
       {
-        // 'hidden': true,
         'description': 'Margin',
         'type': 'radio',
         'options': [
@@ -212,7 +258,6 @@ export class AppComponent {
         ]
       },
       {
-        // 'hidden': true,
         'description': 'Echogenic Foci',
         'type': 'checkbox',
         'options': [
@@ -243,24 +288,24 @@ export class AppComponent {
 
   tiRadLevelOutcome = {
     'TR1' : {
-      'prognosis': 'Benign',
+      'recommendation': 'Benign',
       'notes': ['No FNA']
     },
     'TR2' : {
-      'prognosis': 'Not Suspicious',
+      'recommendation': 'Not Suspicious',
       'notes': ['No FNA']
     },
     'TR3' : {
-      'prognosis': 'Mildly Suspicious',
-      'notes': ['FNA if &ge; 2.5 cm', 'Follow if &ge; 1.5 cm']
+      'recommendation': 'Mildly Suspicious',
+      'notes': ['FNA if ≥ 2.5 cm', 'Follow if ≥ 1.5 cm']
     },
     'TR4' : {
-      'prognosis': 'Moderately Suspicious',
-      'notes': ['FNA if &ge; 1.5 cm', 'Follow if &ge; 1 cm']
+      'recommendation': 'Moderately Suspicious',
+      'notes': ['FNA if ≥ 1.5 cm', 'Follow if ≥ 1 cm']
     },
     'TR5' : {
-      'prognosis': 'Highly Suspicious',
-      'notes': ['FNA if &ge; 1 cm', 'Follow if &ge; 0.5 cm*', '*Refer to discussion of papillary microcarcinomas for 5-9 mm TR5 nodules.']
+      'recommendation': 'Highly Suspicious',
+      'notes': ['FNA if ≥ 1 cm', 'Follow if ≥ 0.5 cm*', '*Refer to discussion of papillary microcarcinomas for 5-9 mm TR5 nodules.']
     }
   }
 }
