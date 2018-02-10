@@ -154,7 +154,7 @@ export class AppComponent {
   // tslint:disable-next-line:member-ordering
   tiRad = {
     'id': 1,
-    'description': 'ARC TI-RADS',
+    'description': 'ACR TI-RADS',
     'characteristics': [
       {
         'description': 'Composition',

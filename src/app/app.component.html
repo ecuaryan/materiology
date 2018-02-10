@@ -4,7 +4,7 @@
     <button mat-icon-button>
       <i class="material-icons">menu</i>
     </button>
-    <button mat-button>ARC TI-RADS</button>
+    <button mat-button>ACR TI-RADS</button>
     <!-- <span class="example-spacer"></span>
     <button mat-button>About</button>
     <button mat-button>Services</button>
@@ -13,7 +13,7 @@
 </mat-toolbar>
 <mat-card>
   <button class="reset-button" mat-fab [disabled]="isEmpty(selectedCharacteristicPointMap)" (click)="reset()">reset</button>
-    <mat-card-title class="accent-text">ARC TI-RADS</mat-card-title>
+    <mat-card-title class="accent-text">ACR TI-RADS</mat-card-title>
     <mat-card-subtitle class="push-right">Fill out the form for all categories to determine the TI-RADS level.</mat-card-subtitle>
     <mat-tab-group #matTabGroup [dynamicHeight]="true">
     <mat-tab *ngFor="let characteristic of tiRad.characteristics">
