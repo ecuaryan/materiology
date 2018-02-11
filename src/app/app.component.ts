@@ -39,9 +39,9 @@ export class AppComponent {
       this.checkForBreak(option);
   }
 
-  openDialog(settings) {
+  openDialog(settings) { // move this to a utilities class too
     let dialogRef = this.matDialog.open(SimpleDialog, {
-      width: settings.width
+      width: settings.width,
       data: {
         title: settings.title,
         content: settings.content,
