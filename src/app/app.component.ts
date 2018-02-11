@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatSnackBar, MatDialog, MatDialogRef } from '@angular/material';
+import { Component, ViewChild, Inject } from '@angular/core';
+import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { tiRad } from '../data/ti-rad';
 import { tiRadLevelOutcome } from '../data/ti-rad-level-outcome';
 
@@ -19,9 +19,16 @@ export class AppComponent {
   constructor(public snackBar: MatSnackBar, public matDialog: MatDialog) {}
 
   openDialog() {
-    let dialogRef = this.matDialog.open(DialogOverviewExampleDialog, {
-      width: '350px'
-      // data: { name: this.name, animal: this.animal }
+    let dialogRef = this.matDialog.open(SimpleDialog, {
+      width: '650px'
+      data: {
+        title: 'title',
+        content: 'content',
+        leftButtonText: 'left',
+        rightButtonText: 'right',
+        leftButtonCallback: () => {alert('wowza')},
+        rightButtonCallback: () => {}
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -62,7 +69,7 @@ export class AppComponent {
     this.copyTextToClipboard(text);
   }
 
-  copyTextToClipboard(text) {
+  copyTextToClipboard(text) { // TODO move to utilities class
     var textArea = document.createElement("textarea");
 
     //
@@ -171,16 +178,16 @@ export class AppComponent {
 }
 
 @Component({
-  selector: 'dialog-overview-example-dialog',
-  // templateUrl: 'dialog-overview-example-dialog.html',
-  template: '<h1>hey</h1>'
+  selector: 'simple-dialog',
+  template: `<h1 mat-dialog-title>{{data.title}}</h1>
+              <div mat-dialog-content>
+                {{data.content}}
+              </div>
+              <div mat-dialog-actions>
+                <button mat-button *ngIf='data.leftButtonText && data.leftButtonCallback' (click)='data.leftButtonCallback()'>{{data.leftButtonText}}</button>
+                <button mat-button *ngIf='data.rightButtonText && data.rightButtonCallback' cdkFocusInitial (click)='data.rightButtonCallback()'>{{data.rightButtonText}}</button>
+              </div>`
 })
-export class DialogOverviewExampleDialog {
-
-  constructor(public dialogRef: MatDialogRef<DialogOverviewExampleDialog>) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
+export class SimpleDialog {
+  constructor(public dialogRef: MatDialogRef<SimpleDialog>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 }
