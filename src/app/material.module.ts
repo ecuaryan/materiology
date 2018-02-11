@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import {
   MatButtonModule,
   MatToolbarModule,
@@ -13,6 +14,7 @@ import {
   MatTooltipModule,
   MatSnackBarModule,
   MatIconModule,
+  MatDialogModule
 } from '@angular/material';
 
 let importExports = [
@@ -28,6 +30,7 @@ let importExports = [
   MatTooltipModule,
   MatSnackBarModule,
   MatIconModule,
+  MatDialogModule
 ];
 
 @NgModule({

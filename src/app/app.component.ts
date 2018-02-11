@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog, MatDialogRef } from '@angular/material';
+import { tiRad } from '../data/ti-rad';
+import { tiRadLevelOutcome } from '../data/ti-rad-level-outcome';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +12,23 @@ export class AppComponent {
   pointsTotal = 0;
   selectedCharacteristicPointMap = {};
   outcome: any = {};
+  tiRad = tiRad;
+  tiRadLevelOutcome = tiRadLevelOutcome;
   @ViewChild('matTabGroup') tabGroup;
 
-  constructor(public snackBar: MatSnackBar) {}
+  constructor(public snackBar: MatSnackBar, public matDialog: MatDialog) {}
+
+  openDialog() {
+    let dialogRef = this.matDialog.open(DialogOverviewExampleDialog, {
+      width: '350px'
+      // data: { name: this.name, animal: this.animal }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
 
   onInputButtonChange = function(event, characteristic, option) {
       if (characteristic.type === 'checkbox') {
@@ -35,13 +51,13 @@ export class AppComponent {
   };
 
   copyOutcomeToClipboard(){
-    let text = this.outcome.recommendation;
+    let text = this.outcome.description + ': ' + this.outcome.recommendation;
 
-    if(this.outcome.notes){
-      for(let i = 0; i < this.outcome.notes.length; i++){
-        text += '\r\n' + this.outcome.notes[i];
-      }
-    }
+    // if(this.outcome.notes){
+    //   for(let i = 0; i < this.outcome.notes.length; i++){
+    //     text += '\r\n' + this.outcome.notes[i];
+    //   }
+    // }
 
     this.copyTextToClipboard(text);
   }
@@ -92,10 +108,10 @@ export class AppComponent {
     try {
       var successful = document.execCommand('copy');
       var msg = successful ? 'successful' : 'unsuccessful';
-      let snackBarRef = this.snackBar.open('Copied: ' + text, 'ok', {duration: 10000});
+      let snackBarRef = this.snackBar.open('Copied: ' + text, 'ok', {duration: 10000}); // take this out
     } catch (err) {
       console.error(err.toString());
-      let snackBarRef = this.snackBar.open('Unable to copy, sorry bro!', 'ok', {duration: 2000});
+      let snackBarRef = this.snackBar.open('Unable to copy, sorry bro!', 'ok', {duration: 2000}); // take this out
     }
 
     document.body.removeChild(textArea);
@@ -103,11 +119,13 @@ export class AppComponent {
 
   checkForBreak(option){
     if(option.break){
-      let message = option.breakReason ? option.breakReason: option.note;
-      let snackBarRef = this.snackBar.open(message, 'reset');
-      snackBarRef.onAction().subscribe(() => {
-        this.reset();
-      });
+
+      this.openDialog();
+      // let message = option.breakReason ? option.breakReason: option.note;
+      // let snackBarRef = this.snackBar.open(message, 'reset');
+      // snackBarRef.onAction().subscribe(() => {
+      //   this.reset();
+      // });
 
       this.calculateOutcome(option.points);
     }
@@ -150,167 +168,19 @@ export class AppComponent {
     }
     return true;
   }
+}
 
-  // tslint:disable-next-line:member-ordering
-  tiRad = {
-    'id': 1,
-    'description': 'ACR TI-RADS',
-    'characteristics': [
-      {
-        'description': 'Composition',
-        'type': 'radio',
-        'options': [
-          {
-            'description': 'Cystic or almost completely cystic',
-            'points': 0
-          },
-          {
-            'description': 'Spongiform',
-            'note': 'Spongiform: Composed predominantly (>50%) of small cystic spaces. Do not add further points for other categories.',
-            'points': 0,
-            'break': true
-          },
-          {
-            'description': 'Mixed cystic and solid',
-            'note': 'Mixed cystic and solid: Assign points for predominant solid component.',
-            'points': 1
-          },
-          {
-            'description': 'Solid or almost completely solid',
-            'points': 2
-          },
-          {
-            'description': 'Cannot be determined because of calcification.',
-            'points': 2
-          }
-        ]
-      },
-      {
-        'description': 'Echogenicity',
-        'type': 'radio',
-        'options': [
-          {
-            'description': 'Anechoic',
-            'note': 'Anechoic: Applies to cystic or almost completely cystic nodules.',
-            'points': 0
-          },
-          {
-            'description': 'Hyperechoic or isoechoic',
-            'note': 'Hyperechoic / isoechoic / hypoechoic: Compared to adjacent parenchyma.',
-            'points': 1
-          },
-          {
-            'description': 'Hypoechoic',
-            'points': 2
-          },
-          {
-            'description': 'Very hypoechoic',
-            'note': 'Very hypoechoic: More hypoechoic than strap muscles.',
-            'points': 3
-          },
-          {
-            'description': 'Cannot be determined',
-            'points': 1
-          }
-        ]
-      },
-      {
-        'description': 'Shape',
-        'type': 'radio',
-        'options': [
-          {
-            'description': 'Wider-than-tall',
-            'points': 0
-          },
-          {
-            'description': 'Taller-than-wide',
-            'note': 'Taller-than-wide: Should be assessed on a transverse image with measurements parallel to sound beam for height and perpendicular to sound beam for width.',
-            'points': 3
-          }
-        ]
-      },
-      {
-        'description': 'Margin',
-        'type': 'radio',
-        'options': [
-          {
-            'description': 'Smooth',
-            'points': 0
-          },
-          {
-            'description': 'Ill-defined',
-            'points': 0
-          },
-          {
-            'description': 'Lobulated or irregular',
-            'note': 'Lobulated: Protrusions into adjacent tissue. Irregular: Jagged, spiculated, or sharp angles.',
-            'points': 2
-          },
-          {
-            'description': 'Extra-thyroidal extension',
-            'note': 'Extrathyroidal extension: Obvious invasion = malignancy.',
-            'points': 3
-          },
-          {
-            'description': 'Cannot be determined',
-            'points': 0
-          }
-        ]
-      },
-      {
-        'description': 'Echogenic Foci',
-        'type': 'checkbox',
-        'options': [
-          {
-            'description': 'None or large comet-tail artifacts',
-            'note': 'Large comet-tail artifacts: V-shaped, >1 mm, in cystic components.',
-            'points': 0
-          },
-          {
-            'description': 'Macrocalcifications',
-            'note': 'Macrocalcifications: Cause acoustic shadowing.',
-            'points': 1
-          },
-          {
-            'description': 'Peripheral (rim) calcifications',
-            'note': 'Peripheral: Complete or incomplete along margin.',
-            'points': 2
-          },
-          {
-            'description': 'Punctate echogenic foci',
-            'note': 'Punctate echogenic foci: May have small comet-tail artifacts.',
-            'points': 3
-          }
-        ]
-      }
-    ]
-  };
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  // templateUrl: 'dialog-overview-example-dialog.html',
+  template: '<h1>hey</h1>'
+})
+export class DialogOverviewExampleDialog {
 
-  tiRadLevelOutcome = {
-    'TR1' : {
-      'description': 'TR1',
-      'recommendation': 'Benign',
-      'notes': ['No FNA']
-    },
-    'TR2' : {
-      'description': 'TR2',
-      'recommendation': 'Not Suspicious',
-      'notes': ['No FNA']
-    },
-    'TR3' : {
-      'description': 'TR3',
-      'recommendation': 'Mildly Suspicious',
-      'notes': ['FNA if ≥ 2.5 cm', 'Follow if ≥ 1.5 cm']
-    },
-    'TR4' : {
-      'description': 'TR4',
-      'recommendation': 'Moderately Suspicious',
-      'notes': ['FNA if ≥ 1.5 cm', 'Follow if ≥ 1 cm']
-    },
-    'TR5' : {
-      'description': 'TR5',
-      'recommendation': 'Highly Suspicious',
-      'notes': ['FNA if ≥ 1 cm', 'Follow if ≥ 0.5 cm*', '*Refer to discussion of papillary microcarcinomas for 5-9 mm TR5 nodules.']
-    }
+  constructor(public dialogRef: MatDialogRef<DialogOverviewExampleDialog>) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
+
 }
