@@ -18,10 +18,15 @@
 
 body{
   margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .footer{
   margin-top: 1px;
+}
+
+.spacer {
+  flex: 1 1 auto;
 }
 
 .push-right{

@@ -1,5 +1,6 @@
-import { Component, ViewChild, Inject } from '@angular/core';
-import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, ViewChild } from '@angular/core';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { SimpleDialog } from './simple-dialog.component';
 import { tiRad } from '../data/ti-rad';
 import { tiRadLevelOutcome } from '../data/ti-rad-level-outcome';
 
@@ -18,26 +19,7 @@ export class AppComponent {
 
   constructor(public snackBar: MatSnackBar, public matDialog: MatDialog) {}
 
-  openDialog() {
-    let dialogRef = this.matDialog.open(SimpleDialog, {
-      width: '650px'
-      data: {
-        title: 'title',
-        content: 'content',
-        leftButtonText: 'left',
-        rightButtonText: 'right',
-        leftButtonCallback: () => {alert('wowza')},
-        rightButtonCallback: () => {}
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
-  }
-
-  onInputButtonChange = function(event, characteristic, option) {
+  onInputButtonChange(event, characteristic, option) {
       if (characteristic.type === 'checkbox') {
         if (event.source.checked) {
           if(!this.selectedCharacteristicPointMap[characteristic.description]){
@@ -55,7 +37,59 @@ export class AppComponent {
       this.addUpPoints();
       this.calculateOutcome();
       this.checkForBreak(option);
-  };
+  }
+
+  openDialog(settings) {
+    let dialogRef = this.matDialog.open(SimpleDialog, {
+      width: settings.width
+      data: {
+        title: settings.title,
+        content: settings.content,
+        leftButtonText: settings.leftButtonText,
+        rightButtonText: settings.rightButtonText,
+        leftButtonCallback: settings.leftButtonCallback,
+        rightButtonCallback: settings.rightButtonCallback
+      }
+    });
+  }
+
+  addUpPoints(){
+    this.pointsTotal = 0;
+    for (const key in this.selectedCharacteristicPointMap ) {
+      if (this.selectedCharacteristicPointMap.hasOwnProperty(key)) {
+        this.pointsTotal += this.selectedCharacteristicPointMap[key];
+      }
+    }
+  }
+
+  reset(){
+    location.reload();
+  }
+
+  calculateOutcome (points = null){
+    if(points !=null){
+      this.pointsTotal = points;
+    }
+    if(this.pointsTotal < 2){
+      this.outcome = this.tiRadLevelOutcome.TR1;
+    } else if (this.pointsTotal < 3){
+      this.outcome = this.tiRadLevelOutcome.TR2;
+    } else if (this.pointsTotal < 4){
+      this.outcome = this.tiRadLevelOutcome.TR3;
+    } else if (this.pointsTotal < 7){
+      this.outcome = this.tiRadLevelOutcome.TR4;
+    } else {
+      this.outcome = this.tiRadLevelOutcome.TR5;
+    }
+  }
+
+  isEmpty (obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+  }
 
   copyOutcomeToClipboard(){
     let text = this.outcome.description + ': ' + this.outcome.recommendation;
@@ -115,6 +149,8 @@ export class AppComponent {
     try {
       var successful = document.execCommand('copy');
       var msg = successful ? 'successful' : 'unsuccessful';
+
+      //TODO remove this from here and instead have it return if it was successful or not and then do this
       let snackBarRef = this.snackBar.open('Copied: ' + text, 'ok', {duration: 10000}); // take this out
     } catch (err) {
       console.error(err.toString());
@@ -126,68 +162,22 @@ export class AppComponent {
 
   checkForBreak(option){
     if(option.break){
-
-      this.openDialog();
-      // let message = option.breakReason ? option.breakReason: option.note;
-      // let snackBarRef = this.snackBar.open(message, 'reset');
-      // snackBarRef.onAction().subscribe(() => {
-      //   this.reset();
-      // });
-
+      let settings = {
+        width: '650px',
+        title: option.description,
+        content: option.breakReason ? option.breakReason: option.note,
+        leftButtonText: 'close',
+        rightButtonText: 'copy & reset',
+        rightButtonCallback: () => {
+          this.copyOutcomeToClipboard();
+          setTimeout(() =>{
+            this.reset();
+          }, 2000)
+        }
+      }
+      this.openDialog(settings);
       this.calculateOutcome(option.points);
     }
   }
 
-  addUpPoints(){
-    this.pointsTotal = 0;
-    for (const key in this.selectedCharacteristicPointMap ) {
-      if (this.selectedCharacteristicPointMap.hasOwnProperty(key)) {
-        this.pointsTotal += this.selectedCharacteristicPointMap[key];
-      }
-    }
-  }
-
-  reset(){
-    location.reload();
-  }
-
-  calculateOutcome (points = null){
-    if(points !=null){
-      this.pointsTotal = points;
-    }
-    if(this.pointsTotal < 2){
-      this.outcome = this.tiRadLevelOutcome.TR1;
-    } else if (this.pointsTotal < 3){
-      this.outcome = this.tiRadLevelOutcome.TR2;
-    } else if (this.pointsTotal < 4){
-      this.outcome = this.tiRadLevelOutcome.TR3;
-    } else if (this.pointsTotal < 7){
-      this.outcome = this.tiRadLevelOutcome.TR4;
-    } else {
-      this.outcome = this.tiRadLevelOutcome.TR5;
-    }
-  }
-
-  isEmpty (obj) {
-    for(var key in obj) {
-        if(obj.hasOwnProperty(key))
-            return false;
-    }
-    return true;
-  }
-}
-
-@Component({
-  selector: 'simple-dialog',
-  template: `<h1 mat-dialog-title>{{data.title}}</h1>
-              <div mat-dialog-content>
-                {{data.content}}
-              </div>
-              <div mat-dialog-actions>
-                <button mat-button *ngIf='data.leftButtonText && data.leftButtonCallback' (click)='data.leftButtonCallback()'>{{data.leftButtonText}}</button>
-                <button mat-button *ngIf='data.rightButtonText && data.rightButtonCallback' cdkFocusInitial (click)='data.rightButtonCallback()'>{{data.rightButtonText}}</button>
-              </div>`
-})
-export class SimpleDialog {
-  constructor(public dialogRef: MatDialogRef<SimpleDialog>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 }

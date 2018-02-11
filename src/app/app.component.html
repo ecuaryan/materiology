@@ -27,7 +27,7 @@
         <mat-divider></mat-divider>
         <ul>
           <li *ngFor="let option of characteristic.options">
-            <mat-checkbox [ngClass]="{'tool-tip-indicator': option.note}" ngModel [name]="option.description" style="text-decoration: dotted;" [matTooltip]="option.note" matTooltipPosition="right" (change)="onInputButtonChange($event, characteristic, option)">({{option.points}}) {{option.description}}</mat-checkbox>
+            <mat-checkbox [ngClass]="{'tool-tip-indicator': option.note}" ngModel [name]="option.description" [matTooltip]="option.note" matTooltipPosition="right" (change)="onInputButtonChange($event, characteristic, option)">({{option.points}}) {{option.description}}</mat-checkbox>
           </li>
         </ul>
       </div>
