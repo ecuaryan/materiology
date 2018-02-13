@@ -44,7 +44,9 @@ export class AppComponent {
       width: settings.width,
       data: {
         title: settings.title,
+        htmlTitle: settings.htmlTitle,
         content: settings.content,
+        htmlContent: settings.htmlContent,
         leftButtonText: settings.leftButtonText,
         rightButtonText: settings.rightButtonText,
         leftButtonCallback: settings.leftButtonCallback,
@@ -61,7 +63,18 @@ export class AppComponent {
     const settings = {
       width: '650px',
       title: 'References',
-      content: 'References!',
+      htmlContent: '<ul><li>1. Tessler FN, Middleton WD, Grant EG, et al. ACR Thyroid Imaging, Reporting and Data System (TI-RADS): White Paper of the ACR TI-RADS Committee. J Am Coll Radiol. In press; 2017. <a class="muted-text" href="http://dx.doi.org/10.1016/j.jacr.2017.01.046" target="_blank">doi.org:10.1016/j.jacr.2017.01.046</a></li><li>2. Grant EG, Tessler FN, Hoang JK, Langer JE, Beland MD, Berland LL, Cronan JJ, Desser TS, Frates MC, Hamper UM, Middleton WD, Reading CC, Scoutt LM, Stavros AT, Teefey SA. Thyroid Ultrasound Reporting Lexicon: White Paper of the ACR Thyroid Imaging, Reporting and Data System (TIRADS) Committee. Journal of the American College of Radiology : JACR. 12 (12 Pt A): 1272-9. <a class="muted-text"  href="https://doi.org/10.1016/j.jacr.2015.07.011" target="_blank">doi:10.1016/j.jacr.2015.07.011</a> - <a class="muted-text"  href="https://www.ncbi.nlm.nih.gov/pubmed/26419308" target="_blank">Pubmed</a></li><li>3. Hoang JK, Langer JE, Middleton WD, Wu CC, Hammers LW, Cronan JJ, Tessler FN, Grant EG, Berland LL. Managing incidental thyroid nodules detected on imaging: white paper of the ACR Incidental Thyroid Findings Committee. Journal of the American College of Radiology : JACR. 12 (2): 143-50. <a class="muted-text"  href="https://doi.org/10.1016/j.jacr.2014.09.038" target="_blank">doi:10.1016/j.jacr.2014.09.038</a> - <a class="muted-text"  href="https://www.ncbi.nlm.nih.gov/pubmed/25456025" target="_blank">Pubmed</a></li></ul>',
+      rightButtonText: 'close'
+    };
+
+    this.openDialog(settings);
+  }
+
+  showTermsDialog() {
+    const settings = {
+      width: '650px',
+      title: 'Terms and Conditions',
+      content: 'The contents of this website are for informational purposes only and do not constitute medical advice; the Content is not intended to be a substitute for professional medical judgement, diagnosis, or treatment.',
       rightButtonText: 'close'
     };
 
