@@ -23,3 +23,8 @@ html{
 .mat-tooltip{
   font-size: 18px;
 }
+
+.radiology-theme .mat-tab-group.mat-primary .mat-tab-list .mat-ink-bar,
+.radiology-theme .mat-tab-nav-bar.mat-primary .mat-tab-list .mat-ink-bar{
+  background-color: mat-color($my-theme-accent);
+}

@@ -22,7 +22,7 @@ export class AppComponent {
   onInputButtonChange(event, characteristic, option) {
       if (characteristic.type === 'checkbox') {
         if (event.source.checked) {
-          if(!this.selectedCharacteristicPointMap[characteristic.description]){
+          if (!this.selectedCharacteristicPointMap[characteristic.description]) {
             this.selectedCharacteristicPointMap[characteristic.description] = 0;
           }
           this.selectedCharacteristicPointMap[characteristic.description] += option.points;
@@ -40,7 +40,7 @@ export class AppComponent {
   }
 
   openDialog(settings) { // move this to a utilities class too
-    let dialogRef = this.matDialog.open(SimpleDialog, {
+    return this.matDialog.open(SimpleDialog, {
       width: settings.width,
       data: {
         title: settings.title,
@@ -48,12 +48,27 @@ export class AppComponent {
         leftButtonText: settings.leftButtonText,
         rightButtonText: settings.rightButtonText,
         leftButtonCallback: settings.leftButtonCallback,
-        rightButtonCallback: settings.rightButtonCallback
+        rightButtonCallback: settings.rightButtonCallback,
+        rightButtonResetDelay: settings.rightButtonResetDelay,
+        leftButtonResetDelay: settings.leftButtonResetDelay
       }
     });
+
+
   }
 
-  addUpPoints(){
+  showReferencesDialog() {
+    const settings = {
+      width: '650px',
+      title: 'References',
+      content: 'References!',
+      rightButtonText: 'close'
+    };
+
+    this.openDialog(settings);
+  }
+
+  addUpPoints() {
     this.pointsTotal = 0;
     for (const key in this.selectedCharacteristicPointMap ) {
       if (this.selectedCharacteristicPointMap.hasOwnProperty(key)) {
@@ -62,21 +77,21 @@ export class AppComponent {
     }
   }
 
-  reset(){
+  reset() {
     location.reload();
   }
 
-  calculateOutcome (points = null){
-    if(points !=null){
+  calculateOutcome (points = null) {
+    if (points != null) {
       this.pointsTotal = points;
     }
-    if(this.pointsTotal < 2){
+    if (this.pointsTotal < 2) {
       this.outcome = this.tiRadLevelOutcome.TR1;
-    } else if (this.pointsTotal < 3){
+    } else if (this.pointsTotal < 3) {
       this.outcome = this.tiRadLevelOutcome.TR2;
-    } else if (this.pointsTotal < 4){
+    } else if (this.pointsTotal < 4) {
       this.outcome = this.tiRadLevelOutcome.TR3;
-    } else if (this.pointsTotal < 7){
+    } else if (this.pointsTotal < 7) {
       this.outcome = this.tiRadLevelOutcome.TR4;
     } else {
       this.outcome = this.tiRadLevelOutcome.TR5;
@@ -84,15 +99,16 @@ export class AppComponent {
   }
 
   isEmpty (obj) {
-    for(var key in obj) {
-        if(obj.hasOwnProperty(key))
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
             return false;
+        }
     }
     return true;
   }
 
-  copyOutcomeToClipboard(){
-    let text = this.outcome.description + ': ' + this.outcome.recommendation;
+  copyOutcomeToClipboard() {
+    const text = this.outcome.description + ': ' + this.outcome.recommendation;
 
     // if(this.outcome.notes){
     //   for(let i = 0; i < this.outcome.notes.length; i++){
@@ -104,7 +120,7 @@ export class AppComponent {
   }
 
   copyTextToClipboard(text) { // TODO move to utilities class
-    var textArea = document.createElement("textarea");
+    const textArea = document.createElement('textarea');
 
     //
     // *** This styling is an extra step which is likely not required. ***
@@ -147,36 +163,38 @@ export class AppComponent {
     textArea.select();
 
     try {
-      var successful = document.execCommand('copy');
-      var msg = successful ? 'successful' : 'unsuccessful';
-
-      //TODO remove this from here and instead have it return if it was successful or not and then do this
-      let snackBarRef = this.snackBar.open('Copied: ' + text, 'ok', {duration: 10000}); // take this out
+      const successful = document.execCommand('copy');
+      // TODO remove this from here and instead have it return if it was successful or not and then do this
+      const snackBarRef = this.snackBar.open('Copied: ' + text, 'ok', {duration: 10000}); // take this out
     } catch (err) {
       console.error(err.toString());
-      let snackBarRef = this.snackBar.open('Unable to copy, sorry bro!', 'ok', {duration: 2000}); // take this out
+      const snackBarRef = this.snackBar.open('Unable to copy, sorry bro!', 'ok', {duration: 2000}); // take this out
     }
 
     document.body.removeChild(textArea);
   }
 
-  checkForBreak(option){
-    if(option.break){
-      let settings = {
+  checkForBreak(option) {
+    if (option.break) {
+      const settings = {
         width: '650px',
-        title: option.description,
-        content: option.breakReason ? option.breakReason: option.note,
+        title: option.breakReasonTitle ? option.breakReasonTitle : option.description,
+        content: option.breakReasonContent ? option.breakReasonContent : option.note,
+        rightButtonResetDelay: 2000,
         leftButtonText: 'close',
         rightButtonText: 'copy & reset',
         rightButtonCallback: () => {
           this.copyOutcomeToClipboard();
-          setTimeout(() =>{
-            this.reset();
-          }, 2000)
         }
-      }
-      this.openDialog(settings);
+      };
       this.calculateOutcome(option.points);
+      const matDialogRef = this.openDialog(settings);
+      matDialogRef.afterClosed().subscribe(delay => {
+        delay = delay ? delay : 0;
+        setTimeout(() => {
+          this.reset();
+        }, delay);
+      });
     }
   }
 

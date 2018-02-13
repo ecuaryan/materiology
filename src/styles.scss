@@ -29,6 +29,15 @@ body{
   flex: 1 1 auto;
 }
 
+.link-on-hover{
+  text-decoration: none;
+
+  &:hover{
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
 .push-right{
   margin-right: 35px;
 }

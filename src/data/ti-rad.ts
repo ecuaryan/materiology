@@ -1,5 +1,5 @@
 // tslint:disable-next-line:member-ordering
-export var tiRad = {
+export const tiRad = {
   'description': 'ACR TI-RADS',
   'characteristics': [
     {
@@ -14,7 +14,9 @@ export var tiRad = {
           'description': 'Spongiform',
           'note': 'Spongiform: Composed predominantly (>50%) of small cystic spaces. Do not add further points for other categories.',
           'points': 0,
-          'break': true
+          'break': true,
+          'breakReasonTitle': 'Spongiform - STOP',
+          'breakReasonContent': 'Do not add further points for other categories. TR1: Benign'
         },
         {
           'description': 'Mixed cystic and solid',

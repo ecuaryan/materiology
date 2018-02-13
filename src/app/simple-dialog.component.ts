@@ -9,10 +9,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
               </div>
               <div mat-dialog-actions>
                 <span class='spacer'></span>
-                <button mat-dialog-close mat-button *ngIf='data.leftButtonText && !data.leftButtonCallback'>{{data.leftButtonText}}</button>
-                <button mat-dialog-close mat-button *ngIf='data.rightButtonText && !data.rightButtonCallback' cdkFocusInitial>{{data.rightButtonText}}</button>
-                <button mat-dialog-close mat-button *ngIf='data.leftButtonText && data.leftButtonCallback' (click)='data.leftButtonCallback()'>{{data.leftButtonText}}</button>
-                <button mat-dialog-close mat-button *ngIf='data.rightButtonText && data.rightButtonCallback' cdkFocusInitial (click)='data.rightButtonCallback()'>{{data.rightButtonText}}</button>
+                <button [mat-dialog-close]="data.leftButtonResetDelay" mat-button *ngIf='data.leftButtonText && !data.leftButtonCallback'>{{data.leftButtonText}}</button>
+                <button [mat-dialog-close]="data.rightButtonResetDelay" mat-button *ngIf='data.rightButtonText && !data.rightButtonCallback' cdkFocusInitial>{{data.rightButtonText}}</button>
+                <button [mat-dialog-close]="data.leftButtonResetDelay" mat-button *ngIf='data.leftButtonText && data.leftButtonCallback' (click)='data.leftButtonCallback()'>{{data.leftButtonText}}</button>
+                <button [mat-dialog-close]="data.rightButtonResetDelay" mat-button *ngIf='data.rightButtonText && data.rightButtonCallback' cdkFocusInitial (click)='data.rightButtonCallback()'>{{data.rightButtonText}}</button>
               </div>`
 })
 export class SimpleDialog {
