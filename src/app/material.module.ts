@@ -14,10 +14,11 @@ import {
   MatTooltipModule,
   MatSnackBarModule,
   MatIconModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSidenavModule
 } from '@angular/material';
 
-let importExports = [
+const importExports = [
   MatButtonModule,
   MatToolbarModule,
   MatInputModule,
@@ -30,7 +31,8 @@ let importExports = [
   MatTooltipModule,
   MatSnackBarModule,
   MatIconModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSidenavModule
 ];
 
 @NgModule({

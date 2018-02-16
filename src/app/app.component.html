@@ -1,59 +1,27 @@
-<!-- <router-outlet></router-outlet> -->
-<mat-toolbar color="primary" class="mat-elevation-z6 app-toolbar">
-  <mat-toolbar-row>
-    <button mat-icon-button>
-      <i class="material-icons">menu</i>
-    </button>
-    <button mat-button>{{tiRad.description}}</button>
-    <!-- <span class="example-spacer"></span>
-    <button mat-button>About</button>
-    <button mat-button>Services</button>
-    <button mat-button>Contact</button> -->
-  </mat-toolbar-row>
-</mat-toolbar>
-<mat-card>
-  <button class="reset-button" mat-fab [disabled]="isEmpty(selectedCharacteristicPointMap)" (click)="reset()">reset</button>
-    <mat-card-title class="accent-text">{{tiRad.description}}</mat-card-title>
-    <mat-card-subtitle class="push-right">Fill out the form for all categories to determine the TI-RADS Level.</mat-card-subtitle>
-    <mat-tab-group #matTabGroup [dynamicHeight]="true">
-    <mat-tab *ngFor="let characteristic of tiRad.characteristics">
-      <ng-template mat-tab-label>
-        <span *ngIf="!selectedCharacteristicPointMap[characteristic.description] && selectedCharacteristicPointMap[characteristic.description] != 0">(-)&nbsp;</span>
-        <span class="accent-text" *ngIf="selectedCharacteristicPointMap[characteristic.description] || selectedCharacteristicPointMap[characteristic.description] === 0">({{selectedCharacteristicPointMap[characteristic.description]}})&nbsp;</span>
-        <span>{{characteristic.description}}</span>
-        </ng-template>
-      <div *ngIf="characteristic.type == 'checkbox'">
-        <p class="accent-text">select all that apply</p>
-        <mat-divider></mat-divider>
-        <ul>
-          <li *ngFor="let option of characteristic.options">
-            <mat-checkbox [ngClass]="{'tool-tip-indicator': option.note}" ngModel [name]="option.description" [matTooltip]="option.note" matTooltipPosition="right" (change)="onInputButtonChange($event, characteristic, option)">({{option.points}}) {{option.description}}</mat-checkbox>
-          </li>
-        </ul>
-      </div>
-      <div *ngIf="characteristic.type == 'radio'">
-        <p class="accent-text">select one</p>
-        <mat-divider></mat-divider>
-        <mat-list>
-          <mat-radio-group ngModel [name]="characteristic.description" >
-            <mat-list-item *ngFor="let option of characteristic.options">
-              <mat-radio-button [ngClass]="{'tool-tip-indicator': option.note}" [matTooltip]="option.note" matTooltipPosition="right" (change)="onInputButtonChange($event, characteristic, option)">({{option.points}}) {{option.description}}</mat-radio-button>
-            </mat-list-item>
-          </mat-radio-group>
-        </mat-list>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-  <mat-card class="mat-elevation-z24" *ngIf="!isEmpty(selectedCharacteristicPointMap)">
-    <mat-card-title class="accent-text">
-      <span>{{pointsTotal}} Points - {{outcome.description}}: {{outcome.recommendation}}</span>
-    </mat-card-title>
-    <mat-card-content class="accent-text">
-      <p *ngFor="let note of outcome.notes" [innerHTML]="note"></p>
-    </mat-card-content>
-    <button class="copy-outcome" mat-raised-button (click)="copyOutcomeToClipboard()">copy</button>
-  </mat-card>
-</mat-card>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-list>
+      <a routerLink="/ti-rads" mat-list-item (click)="sidenav.toggle()">ACR TI-RADS</a>
+      <a routerLink="/liver" mat-list-item (click)="sidenav.toggle()">Incidental Liver Lesions</a>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mat-elevation-z6 app-toolbar">
+      <mat-toolbar-row>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <i class="material-icons">menu</i>
+        </button>
+        <a routerLink="/ti-rads" mat-button>ACR TI-RADS</a>
+        <a routerLink="/liver" mat-button>Incidental Liver Lesions</a>
+        <!-- <span class="example-spacer"></span>
+        <button mat-button>About</button>
+        <button mat-button>Services</button>
+        <button mat-button>Contact</button>-->
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 <mat-card class="text-center muted-text footer">
   <span>Made with</span>
   <button mat-icon-button color="accent">

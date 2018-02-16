@@ -1,4 +1,3 @@
-// tslint:disable-next-line:member-ordering
 export const tiRad = {
   'description': 'ACR TI-RADS',
   'characteristics': [
