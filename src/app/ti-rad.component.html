@@ -1,20 +1,20 @@
 <mat-card>
   <button class="reset-button" mat-fab [disabled]="isEmpty(selectedCharacteristicPointMap)" (click)="reset()">reset</button>
-    <mat-card-title class="accent-text">{{tiRad.description}}</mat-card-title>
-    <mat-card-subtitle class="push-right">Fill out the form for all categories to determine the TI-RADS Level.</mat-card-subtitle>
-    <mat-tab-group #matTabGroup [dynamicHeight]="true">
+  <mat-card-title class="accent-text">{{tiRad.description}}</mat-card-title>
+  <mat-card-subtitle class="push-right">Fill out the form for all categories to determine the ACR TI-RADS Level.</mat-card-subtitle>
+  <mat-tab-group #matTabGroup [dynamicHeight]="true">
     <mat-tab *ngFor="let characteristic of tiRad.characteristics">
       <ng-template mat-tab-label>
         <span *ngIf="!selectedCharacteristicPointMap[characteristic.description] && selectedCharacteristicPointMap[characteristic.description] != 0">(-)&nbsp;</span>
         <span class="accent-text" *ngIf="selectedCharacteristicPointMap[characteristic.description] || selectedCharacteristicPointMap[characteristic.description] === 0">({{selectedCharacteristicPointMap[characteristic.description]}})&nbsp;</span>
         <span>{{characteristic.description}}</span>
-        </ng-template>
+      </ng-template>
       <div *ngIf="characteristic.type == 'checkbox'">
         <p class="accent-text">select all that apply</p>
         <mat-divider></mat-divider>
         <ul>
           <li *ngFor="let option of characteristic.options">
-            <mat-checkbox [ngClass]="{'tool-tip-indicator': option.note}" ngModel [name]="option.description" [matTooltip]="option.note" matTooltipPosition="right" (change)="onInputButtonChange($event, characteristic, option)">({{option.points}}) {{option.description}}</mat-checkbox>
+            <mat-checkbox [ngClass]="{'tool-tip-indicator': option.note}" ngModel [name]="option.description" [matTooltip]="option.note" matTooltipPosition="right" (change)="onInputButtonChange($event, characteristic, option)">({{option.points}}) {{option.description}} <i *ngIf='option.note' class="material-icons">help_outline</i></mat-checkbox>
           </li>
         </ul>
       </div>
@@ -24,7 +24,7 @@
         <mat-list>
           <mat-radio-group ngModel [name]="characteristic.description" >
             <mat-list-item *ngFor="let option of characteristic.options">
-              <mat-radio-button [ngClass]="{'tool-tip-indicator': option.note}" [matTooltip]="option.note" matTooltipPosition="right" (change)="onInputButtonChange($event, characteristic, option)">({{option.points}}) {{option.description}}</mat-radio-button>
+              <mat-radio-button [ngClass]="{'tool-tip-indicator': option.note}" [matTooltip]="option.note" matTooltipPosition="right" (change)="onInputButtonChange($event, characteristic, option)">({{option.points}}) {{option.description}} <i *ngIf='option.note' class="material-icons">help_outline</i></mat-radio-button>
             </mat-list-item>
           </mat-radio-group>
         </mat-list>

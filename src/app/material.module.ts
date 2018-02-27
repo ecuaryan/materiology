@@ -15,7 +15,8 @@ import {
   MatSnackBarModule,
   MatIconModule,
   MatDialogModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatChipsModule
 } from '@angular/material';
 
 const importExports = [
@@ -32,7 +33,8 @@ const importExports = [
   MatSnackBarModule,
   MatIconModule,
   MatDialogModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatChipsModule
 ];
 
 @NgModule({

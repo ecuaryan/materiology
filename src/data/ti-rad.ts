@@ -1,5 +1,5 @@
 export const tiRad = {
-  'description': 'ACR TI-RADS',
+  'description': 'TI-RADS',
   'characteristics': [
     {
       'description': 'Composition',

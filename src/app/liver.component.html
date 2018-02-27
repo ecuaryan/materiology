@@ -1,3 +1,28 @@
 <mat-card>
-  <button mat-button (click)="sendGaEvent()">Click me if you want to see this feature!</button>
+    <mat-card-title class="accent-text">{{title}}</mat-card-title>
+    <mat-card-subtitle class="push-right">{{subtitle}}</mat-card-subtitle>
+    <div style="margin-bottom: 30px;">
+        <mat-chip-list>
+            <button mat-raised-button [disabled]="isBackButtonDisabled()" style="margin-right: 30px;" (click)="goBack()">
+                <i class="material-icons">keyboard_arrow_left</i>
+            </button>
+            <mat-chip>{{selectedOption.prompt}}</mat-chip>
+        </mat-chip-list>
+    </div>
+    <span  *ngFor="let option of availableOptions">
+        <span *ngIf="option.linkOptionIds">
+            <span style="margin: 30px;">
+                <a mat-raised-button color="accent" [routerLink]="['/liver/' + option.id]">{{option.prompt}}</a>
+                <i *ngIf='option.notes' class="material-icons note-dialog" (click)="openNotesDialog(option.prompt, option.notes)">help_outline</i>
+            </span>
+        </span>
+        <mat-card class="mat-elevation-z24" *ngIf="!option.linkOptionIds">
+            <mat-card-title class="accent-text">
+                <span>{{option.prompt}}</span>
+            </mat-card-title>
+            <mat-card-content class="accent-text">
+                <p *ngFor="let note of option.notes" [innerHTML]="note.body"></p>
+            </mat-card-content>
+        </mat-card>
+    </span>
 </mat-card>

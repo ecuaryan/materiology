@@ -1,8 +1,8 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <mat-list>
-      <a routerLink="/ti-rads" mat-list-item (click)="sidenav.toggle()">ACR TI-RADS</a>
-      <a routerLink="/liver" mat-list-item (click)="sidenav.toggle()">Incidental Liver Lesions</a>
+      <a routerLink="/ti-rads" mat-list-item (click)="sidenav.toggle()">TI-RADS</a>
+      <a routerLink="/liver" mat-list-item (click)="sidenav.toggle()">LIVER</a>
     </mat-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -11,8 +11,8 @@
         <button mat-icon-button (click)="sidenav.toggle()">
           <i class="material-icons">menu</i>
         </button>
-        <a routerLink="/ti-rads" mat-button>ACR TI-RADS</a>
-        <a routerLink="/liver" mat-button>Incidental Liver Lesions</a>
+        <a routerLink="/ti-rads" mat-button>TI-RADS</a>
+        <a routerLink="/liver" mat-button>LIVER</a>
         <!-- <span class="example-spacer"></span>
         <button mat-button>About</button>
         <button mat-button>Services</button>

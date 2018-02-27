@@ -86,10 +86,10 @@ li{
 }
 
 .tool-tip-indicator {
-  .mat-radio-label-content,
-  .mat-checkbox-label{
-    text-decoration: underline;
-    text-decoration-color: mat-color($my-theme-accent);
+  i{
+    vertical-align: middle;
+    font-size: 18px;
+    color: mat-color($my-theme-accent);
   }
 }
 
@@ -97,4 +97,10 @@ button.copy-outcome{
   position: absolute;
   right: 15px;
   bottom: 15px;
+}
+
+i.note-dialog{
+  vertical-align: middle;
+  color: mat-color($my-theme-accent);
+  cursor: pointer;
 }
