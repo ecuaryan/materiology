@@ -112,7 +112,7 @@ export const LIVER_WORKFLOW = {
 export const LIVER_WORKFLOW_NOTES = [
   {
     id: 1,
-    body: 'If inadequate imaging is available to ascertain the presence of benign versus suspicious features in a ≥ 1-cm lesion, prompt MRI is advised.'
+    body: 'If inadequate imaging is available to ascertain the presence of benign versus suspicious features in a ≥1-cm lesion, prompt MRI is advised.'
   },
   {
     id: 2,

@@ -1,4 +1,5 @@
 <mat-card>
+    <button class="reset-button" mat-fab [disabled]="isBackButtonDisabled()" routerLink="/liver">reset</button>
     <mat-card-title class="accent-text">{{title}}</mat-card-title>
     <mat-card-subtitle class="push-right">{{subtitle}}</mat-card-subtitle>
     <div style="margin-bottom: 30px;">
