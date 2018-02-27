@@ -1,5 +1,5 @@
 <mat-card>
-  <button class="reset-button" mat-fab [disabled]="isEmpty(selectedCharacteristicPointMap)" (click)="reset()">reset</button>
+  <button class="reset-button" mat-fab [disabled]="util.isEmpty(selectedCharacteristicPointMap)" (click)="reset()">reset</button>
   <mat-card-title class="accent-text">{{tiRad.description}}</mat-card-title>
   <mat-card-subtitle class="push-right">Fill out the form for all categories to determine the ACR TI-RADS Level.</mat-card-subtitle>
   <mat-tab-group #matTabGroup [dynamicHeight]="true">
@@ -31,7 +31,7 @@
       </div>
     </mat-tab>
   </mat-tab-group>
-  <mat-card class="mat-elevation-z24" *ngIf="!isEmpty(selectedCharacteristicPointMap)">
+  <mat-card class="mat-elevation-z24" *ngIf="!util.isEmpty(selectedCharacteristicPointMap)">
     <mat-card-title class="accent-text">
       <span>{{pointsTotal}} Points - {{outcome.description}}: {{outcome.recommendation}}</span>
     </mat-card-title>

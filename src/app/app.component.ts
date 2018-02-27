@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { SimpleDialog } from './simple-dialog.component';
+import { MatDialog } from '@angular/material';
+import { Util } from './util.component';
 
 @Component({
   selector: 'app-root',
@@ -9,25 +9,7 @@ import { SimpleDialog } from './simple-dialog.component';
 })
 export class AppComponent {
 
-  constructor(public matDialog: MatDialog) {}
-
-  openDialog(settings) { // move this to a utilities class too
-    return this.matDialog.open(SimpleDialog, {
-      width: settings.width,
-      data: {
-        title: settings.title,
-        htmlTitle: settings.htmlTitle,
-        content: settings.content,
-        htmlContent: settings.htmlContent,
-        leftButtonText: settings.leftButtonText,
-        rightButtonText: settings.rightButtonText,
-        leftButtonCallback: settings.leftButtonCallback,
-        rightButtonCallback: settings.rightButtonCallback,
-        rightButtonResetDelay: settings.rightButtonResetDelay,
-        leftButtonResetDelay: settings.leftButtonResetDelay
-      }
-    });
-  }
+  constructor(public matDialog: MatDialog, public util: Util) {}
 
   showReferencesDialog() {
     const settings = {
@@ -37,7 +19,7 @@ export class AppComponent {
       rightButtonText: 'close'
     };
 
-    this.openDialog(settings);
+    this.util.openSimpleDialog(settings);
   }
 
   showTermsDialog() {
@@ -48,7 +30,7 @@ export class AppComponent {
       rightButtonText: 'close'
     };
 
-    this.openDialog(settings);
+    this.util.openSimpleDialog(settings);
   }
 
 }

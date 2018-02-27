@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material';
-import { SimpleDialog } from './simple-dialog.component';
+import { Util } from './util.component';
 import { Location } from '@angular/common';
 import { DataService } from './data.service';
 import 'rxjs/add/operator/switchMap';
@@ -23,7 +22,7 @@ export class LiverComponent implements OnInit {
     private service: DataService,
     private route: ActivatedRoute,
     private location: Location,
-    public matDialog: MatDialog
+    public util: Util
   ) {}
 
   ngOnInit() {
@@ -64,24 +63,6 @@ export class LiverComponent implements OnInit {
       htmlContent: noteElements,
       rightButtonText: 'close'
     };
-    this.openDialog(settings);
-  }
-
-  openDialog(settings) { // move this to a utilities class too
-    return this.matDialog.open(SimpleDialog, {
-      width: settings.width,
-      data: {
-        title: settings.title,
-        htmlTitle: settings.htmlTitle,
-        content: settings.content,
-        htmlContent: settings.htmlContent,
-        leftButtonText: settings.leftButtonText,
-        rightButtonText: settings.rightButtonText,
-        leftButtonCallback: settings.leftButtonCallback,
-        rightButtonCallback: settings.rightButtonCallback,
-        rightButtonResetDelay: settings.rightButtonResetDelay,
-        leftButtonResetDelay: settings.leftButtonResetDelay
-      }
-    });
+    this.util.openSimpleDialog(settings);
   }
 }

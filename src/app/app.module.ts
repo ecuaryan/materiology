@@ -8,6 +8,7 @@ import { LiverComponent } from './liver.component';
 import { MaterialModule } from './material.module';
 import { SimpleDialog } from './simple-dialog.component';
 import { FormsModule } from '@angular/forms';
+import { Util } from './util.component';
 // import { LIVER_OPTIONS } from '../data/liver-options';
 import { DataService } from './data.service';
 import { OptionResolverService } from './option-resolver.service';
@@ -43,11 +44,13 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     SimpleDialog,
+    Util,
     TiRadComponent,
     LiverComponent
   ],
   entryComponents: [
-    SimpleDialog
+    SimpleDialog,
+    Util
   ],
   imports: [
     RouterModule.forRoot(
@@ -64,7 +67,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     DataService,
-    OptionResolverService
+    OptionResolverService,
+    Util
   ],
   bootstrap: [AppComponent]
 })
