@@ -49,7 +49,7 @@ body{
 }
 
 .push-right{
-  margin-right: 35px;
+  margin-right: 45px;
 }
 
 .muted-text{
@@ -104,4 +104,8 @@ i.note-dialog{
   vertical-align: middle;
   color: mat-color($my-theme-accent);
   cursor: pointer;
+}
+
+.mat-list{
+  overflow: auto;
 }
