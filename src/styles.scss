@@ -22,7 +22,7 @@ body{
 }
 
 mat-sidenav-container{
-  height: calc(100% - 88px);
+  min-height: calc(100% - 88px);
 }
 
 body{
