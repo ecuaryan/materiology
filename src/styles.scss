@@ -126,7 +126,8 @@ mat-sidenav{
     outline: 0;
     text-decoration: none;
 
-    &:focus i{
+    &:focus i,
+    &:hover i{
       color: mat-color($my-theme-accent);
     }
 
