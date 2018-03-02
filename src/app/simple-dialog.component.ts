@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'simple-dialog',
+  selector: 'app-simple-dialog',
   template: `<h1 mat-dialog-title>
               <div *ngIf="data.title">{{data.title}}</div>
               <div *ngIf="data.htmlTitle" [innerHTML]="data.htmlTitle"></div>
@@ -19,6 +19,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
               <button [mat-dialog-close]="data.rightButtonResetDelay" mat-button *ngIf='data.rightButtonText && data.rightButtonCallback' cdkFocusInitial (click)='data.rightButtonCallback()'>{{data.rightButtonText}}</button>
             </div>`
 })
-export class SimpleDialog {
-  constructor(public dialogRef: MatDialogRef<SimpleDialog>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+export class SimpleDialogComponent {
+  constructor(public dialogRef: MatDialogRef<SimpleDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 }

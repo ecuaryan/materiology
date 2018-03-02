@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { Util } from './util.component';
+import { UtilComponent } from './util.component';
 import { tiRad } from '../data/ti-rad';
 import { tiRadLevelOutcome } from '../data/ti-rad-level-outcome';
 
 @Component({
-  selector: 'ti-rad',
+  selector: 'app-ti-rad',
   templateUrl: './ti-rad.component.html',
   styleUrls: ['./ti-rad.component.scss']
 })
@@ -16,7 +16,7 @@ export class TiRadComponent {
   tiRadLevelOutcome = tiRadLevelOutcome;
   @ViewChild('matTabGroup') tabGroup;
 
-  constructor(public util: Util) {}
+  constructor(public util: UtilComponent) {}
 
   onInputButtonChange(event, characteristic, option) {
       if (characteristic.type === 'checkbox') {
@@ -96,5 +96,4 @@ export class TiRadComponent {
       });
     }
   }
-
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { Util } from './util.component';
+import { UtilComponent } from './util.component';
+import { LIVER_VIEW_TEXT, LIVER_ROOT_PATH } from '../data/liver-workflow';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,18 @@ import { Util } from './util.component';
 })
 export class AppComponent {
 
-  constructor(public matDialog: MatDialog, public util: Util) {}
+  pages: Array<any> = [
+    {
+      path: '/ti-rads',
+      viewText: 'TI-RADS'
+    },
+    {
+      path: LIVER_ROOT_PATH,
+      viewText: LIVER_VIEW_TEXT
+    }
+  ];
+
+  constructor(public matDialog: MatDialog, public util: UtilComponent) {}
 
   showReferencesDialog() {
     const settings = {

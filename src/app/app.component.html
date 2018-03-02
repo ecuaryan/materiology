@@ -1,9 +1,11 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
-    <mat-list>
-      <a routerLink="/ti-rads" mat-list-item (click)="sidenav.toggle()">TI-RADS</a>
-      <a routerLink="/liver" mat-list-item (click)="sidenav.toggle()">LIVER</a>
-    </mat-list>
+    <a class="link-container" *ngFor="let page of pages" [routerLink]="page.path" (click)="sidenav.toggle()" routerLinkActive="active">
+      <span>{{page.viewText}}</span>
+      <!-- <i class="material-icons" style="float:right;">menu</i> -->
+      <i class="material-icons checked-icon">radio_button_checked</i>
+      <i class="material-icons unchecked-icon">radio_button_unchecked</i>
+    </a>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="mat-elevation-z6 app-toolbar">
@@ -11,8 +13,9 @@
         <button mat-icon-button (click)="sidenav.toggle()">
           <i class="material-icons">menu</i>
         </button>
-        <a routerLink="/ti-rads" mat-button>TI-RADS</a>
-        <a routerLink="/liver" mat-button>LIVER</a>
+        <a *ngFor="let page of pages" [routerLink]="page.path" mat-button>{{page.viewText}}</a>
+        <!-- <a routerLink="/ti-rads" mat-button>TI-RADS</a>
+        <a routerLink="/liver" mat-button>LIVER</a> -->
         <!-- <span class="example-spacer"></span>
         <button mat-button>About</button>
         <button mat-button>Services</button>

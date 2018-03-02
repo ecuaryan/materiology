@@ -1,6 +1,12 @@
+import { WorkflowComponent } from '../app/workflow.component';
+
+export const LIVER_ROOT_PATH = 'liver';
+export const LIVER_VIEW_TEXT = 'LIVER';
+
 export const LIVER_WORKFLOW = {
-  title: 'LIVER',
+  title: LIVER_VIEW_TEXT,
   subtitle: 'Follow the incidental liver mass algorithm to determine the appropriate ACR White Paper recommendation.',
+  rootPath: LIVER_ROOT_PATH,
   options: [
     {
       id: 1,
@@ -105,47 +111,62 @@ export const LIVER_WORKFLOW = {
       prompt: 'Indeterminate imaging features',
       linkOptionIds: [13]
     }
+  ],
+  notes: [
+    {
+      id: 1,
+      body: 'If inadequate imaging is available to ascertain the presence of benign versus suspicious features in a ≥1-cm lesion, prompt MRI is advised.'
+    },
+    {
+      id: 2,
+      body: '<p>No known primary malignancy, hepatic dysfunction, or hepatic risk factors.</p><p>Hepatic Risk Factors:</p><div>Hepatitis</div><div>NASH</div><div>Alcoholism</div><div>PSC</div><div>PBC</div><div>Choledochal cysts</div><div>Hemochromatosis and other hereditary hepatic conditions</div><div>Anabolic steroid use</div>'
+    },
+    {
+      id: 3,
+      body: '<p>Known primary malignancy with a propensity to metastasize to the liver, cirrhosis, and/or hepatic risk factors.</p><p>Hepatic Risk Factors:</p><div>Hepatitis</div><div>NASH</div><div>Alcoholism</div><div>PSC</div><div>PBC</div><div>Choledochal cysts</div><div>Hemochromatosis and other hereditary hepatic conditions</div><div>Anabolic steroid use</div>'
+    },
+    {
+      id: 4,
+      body: 'May need more immediate follow-up in some scenarios. CT is also acceptable in a patient with cancer who is due for routine CT surveillance.'
+    },
+    {
+      id: 5,
+      body: '<p>Sharp margin, homogeneous low attenuation (20 Hounsfield units [HU]) on noncontrast and/or portal venous–phase imaging.</p><p>Characteristic features of hemangiomas, focal nodular hyperplasia, focal fatty sparing or deposition, or perfusional changes.</p><p>If pseudoenhancement is present, a benign cyst may measure >20 HU; radiologists\' discretion is necessary.</p>'
+    },
+    {
+      id: 6,
+      title: 'Suspicious Features',
+      body: '<p>Ill-defined margins, heterogeneous density, mural thickening or nodularity, thick septa, and intermediate to high attenuation on portal venous–phase imaging (>20 HU, in the absence of pseudoenhancement).</p><p>If pre and postcontrast CT is available, enhancement >20 HU is a suspicious feature.</p>'
+    },
+    {
+      id: 7,
+      title: 'Flash-filling',
+      body: '<p>Uniform hyperenhancement relative to hepatic parenchyma on arterial-phase (including late arterial/early portal venous–phase) postcontrast imaging.</p><p>If additional postcontrast phases are available to characterize lesion as benign (eg, hemangioma) or suspicious (eg, hepatocellular carcinoma), the lesion should be placed in one of those respective categories and not here.</p>'
+    },
+    {
+      id: 8,
+      body: '<p>Incidental hepatic lesions that are >1.5 cm and do not have benign features should at least undergo prompt MRI. Direct biopsy (without MRI) may be appropriate in some scenarios.</p><p>Differentiation of FNH from adenoma is important, especially if larger than 3 cm and subcapsular in location; for such patients, MRI with gadoxetate disodium is advised.</p>'
+    },
+    {
+      id: 9,
+      body: 'If biopsy is pursued, core biopsy is preferred over fine-needle aspiration.'
+    }
   ]
 };
 
-
-export const LIVER_WORKFLOW_NOTES = [
+export const LIVER_ROUTES = [
   {
-    id: 1,
-    body: 'If inadequate imaging is available to ascertain the presence of benign versus suspicious features in a ≥1-cm lesion, prompt MRI is advised.'
+    path: LIVER_ROOT_PATH,
+    component: WorkflowComponent,
+    data: {
+      workFlow: LIVER_WORKFLOW
+    }
   },
   {
-    id: 2,
-    body: '<p>No known primary malignancy, hepatic dysfunction, or hepatic risk factors.</p><p>Hepatic Risk Factors:</p><div>Hepatitis</div><div>NASH</div><div>Alcoholism</div><div>PSC</div><div>PBC</div><div>Choledochal cysts</div><div>Hemochromatosis and other hereditary hepatic conditions</div><div>Anabolic steroid use</div>'
-  },
-  {
-    id: 3,
-    body: '<p>Known primary malignancy with a propensity to metastasize to the liver, cirrhosis, and/or hepatic risk factors.</p><p>Hepatic Risk Factors:</p><div>Hepatitis</div><div>NASH</div><div>Alcoholism</div><div>PSC</div><div>PBC</div><div>Choledochal cysts</div><div>Hemochromatosis and other hereditary hepatic conditions</div><div>Anabolic steroid use</div>'
-  },
-  {
-    id: 4,
-    body: 'May need more immediate follow-up in some scenarios. CT is also acceptable in a patient with cancer who is due for routine CT surveillance.'
-  },
-  {
-    id: 5,
-    body: '<p>Sharp margin, homogeneous low attenuation (20 Hounsfield units [HU]) on noncontrast and/or portal venous–phase imaging.</p><p>Characteristic features of hemangiomas, focal nodular hyperplasia, focal fatty sparing or deposition, or perfusional changes.</p><p>If pseudoenhancement is present, a benign cyst may measure >20 HU; radiologists\' discretion is necessary.</p>'
-  },
-  {
-    id: 6,
-    title: 'Suspicious Features',
-    body: '<p>Ill-defined margins, heterogeneous density, mural thickening or nodularity, thick septa, and intermediate to high attenuation on portal venous–phase imaging (>20 HU, in the absence of pseudoenhancement).</p><p>If pre and postcontrast CT is available, enhancement >20 HU is a suspicious feature.</p>'
-  },
-  {
-    id: 7,
-    title: 'Flash-filling',
-    body: '<p>Uniform hyperenhancement relative to hepatic parenchyma on arterial-phase (including late arterial/early portal venous–phase) postcontrast imaging.</p><p>If additional postcontrast phases are available to characterize lesion as benign (eg, hemangioma) or suspicious (eg, hepatocellular carcinoma), the lesion should be placed in one of those respective categories and not here.</p>'
-  },
-  {
-    id: 8,
-    body: '<p>Incidental hepatic lesions that are >1.5 cm and do not have benign features should at least undergo prompt MRI. Direct biopsy (without MRI) may be appropriate in some scenarios.</p><p>Differentiation of FNH from adenoma is important, especially if larger than 3 cm and subcapsular in location; for such patients, MRI with gadoxetate disodium is advised.</p>'
-  },
-  {
-    id: 9,
-    body: 'If biopsy is pursued, core biopsy is preferred over fine-needle aspiration.'
-  },
+    path: LIVER_ROOT_PATH + '/:id',
+    component: WorkflowComponent,
+    data: {
+      workFlow: LIVER_WORKFLOW
+    }
+  }
 ];

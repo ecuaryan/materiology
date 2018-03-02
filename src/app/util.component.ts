@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { SimpleDialog } from './simple-dialog.component';
+import { SimpleDialogComponent } from './simple-dialog.component';
 
 @Component({
-  selector: 'util',
+  selector: 'app-util',
   template: ''
 })
-export class Util {
+export class UtilComponent {
   constructor(public snackBar: MatSnackBar, public matDialog: MatDialog ) {}
 
   public openSimpleDialog(settings) {
-    return this.matDialog.open(SimpleDialog, {
+    return this.matDialog.open(SimpleDialogComponent, {
       width: settings.width,
       data: {
         title: settings.title,

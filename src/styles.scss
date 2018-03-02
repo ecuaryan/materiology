@@ -106,6 +106,45 @@ i.note-dialog{
   cursor: pointer;
 }
 
-.mat-list{
-  overflow: auto;
+mat-list{
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+mat-sidenav{
+  padding-top: 25px;
+  min-width: 250px;
+  display: flex;
+  
+  .link-container{
+    overflow: hidden;
+    padding: 10px;
+    font-size: larger;
+    font-weight: bolder;
+    color: #FFF;
+    display: block;
+    outline: 0;
+    text-decoration: none;
+
+    &:focus i{
+      color: mat-color($my-theme-accent);
+    }
+
+    i{
+      float:right;
+
+      &.checked-icon{
+        display: none;
+      }
+    }
+
+    &.active i.checked-icon{
+        color: mat-color($my-theme-accent);
+        display: inline;
+    }
+
+    &.active i.unchecked-icon{
+      display: none;
+    }
+  }
 }

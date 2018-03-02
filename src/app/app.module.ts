@@ -1,40 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, Router, PreloadAllModules } from '@angular/router';
+import { RouterModule, Routes, Router } from '@angular/router'; // PreloadAllModules
 import { AppComponent } from './app.component';
 import { TiRadComponent } from './ti-rad.component';
-import { LiverComponent } from './liver.component';
+import { WorkflowComponent } from './workflow.component';
 import { MaterialModule } from './material.module';
-import { SimpleDialog } from './simple-dialog.component';
+import { SimpleDialogComponent } from './simple-dialog.component';
 import { FormsModule } from '@angular/forms';
-import { Util } from './util.component';
-// import { LIVER_OPTIONS } from '../data/liver-options';
-import { DataService } from './data.service';
-import { OptionResolverService } from './option-resolver.service';
+import { UtilComponent } from './util.component';
+import { LIVER_WORKFLOW, LIVER_ROUTES } from '../data/liver-workflow';
 
 const appRoutes: Routes = [
   {
     path: 'ti-rads',
     component: TiRadComponent
   },
-  {
-    path: 'liver',
-    component: LiverComponent,
-    resolve: {
-      option: OptionResolverService
-    }
-  },
-  {
-    path: 'liver/:id',
-    component: LiverComponent,
-    resolve: {
-      option: OptionResolverService
-    }
-  },
+  LIVER_ROUTES[0],
+  LIVER_ROUTES[1],
   {
     path: '',
-    redirectTo: '/liver',
+    redirectTo: LIVER_WORKFLOW.rootPath,
     pathMatch: 'full'
   },
   // { path: '**', component: PageNotFoundComponent }
@@ -43,22 +29,22 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    SimpleDialog,
-    Util,
+    SimpleDialogComponent,
+    UtilComponent,
     TiRadComponent,
-    LiverComponent
+    WorkflowComponent
   ],
   entryComponents: [
-    SimpleDialog,
-    Util
+    SimpleDialogComponent,
+    UtilComponent
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      {
-        // enableTracing: true, // <-- debugging purposes only
-        preloadingStrategy: PreloadAllModules
-      }
+      // {
+      //   // enableTracing: true, // <-- debugging purposes only
+      //   // preloadingStrategy: PreloadAllModules
+      // }
     ),
     BrowserModule,
     BrowserAnimationsModule,
@@ -66,9 +52,7 @@ const appRoutes: Routes = [
     FormsModule
   ],
   providers: [
-    DataService,
-    OptionResolverService,
-    Util
+    UtilComponent
   ],
   bootstrap: [AppComponent]
 })
