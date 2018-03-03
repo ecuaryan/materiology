@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UtilComponent } from './util.component';
 import { LIVER_VIEW_TEXT, LIVER_ROOT_PATH } from '../data/liver-workflow';
+import { ADRENAL_VIEW_TEXT, ADRENAL_ROOT_PATH } from '../data/adrenal-workflow';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,10 @@ export class AppComponent {
     {
       path: LIVER_ROOT_PATH,
       viewText: LIVER_VIEW_TEXT
+    },
+    {
+      path: ADRENAL_ROOT_PATH,
+      viewText: ADRENAL_VIEW_TEXT
     }
   ];
 

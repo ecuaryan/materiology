@@ -10,6 +10,7 @@ import { SimpleDialogComponent } from './simple-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { UtilComponent } from './util.component';
 import { LIVER_WORKFLOW, LIVER_ROUTES } from '../data/liver-workflow';
+import { ADRENAL_WORKFLOW, ADRENAL_ROUTES } from '../data/adrenal-workflow';
 
 const appRoutes: Routes = [
   {
@@ -18,6 +19,8 @@ const appRoutes: Routes = [
   },
   LIVER_ROUTES[0],
   LIVER_ROUTES[1],
+  ADRENAL_ROUTES[0],
+  ADRENAL_ROUTES[1],
   {
     path: '',
     redirectTo: LIVER_WORKFLOW.rootPath,
