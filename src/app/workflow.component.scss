@@ -2,3 +2,12 @@ a[mat-raised-button],
 button[mat-raised-button]{
   margin: 10px;
 }
+
+.button-icon-grouping{
+  margin: 0 25px; 
+  display: inline-block;
+
+  i{
+    margin-left: -10px;
+  }
+}

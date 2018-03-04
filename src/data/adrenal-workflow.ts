@@ -5,151 +5,237 @@ export const ADRENAL_VIEW_TEXT = 'ADRENAL';
 
 export const ADRENAL_WORKFLOW = {
   title: ADRENAL_VIEW_TEXT,
-  subtitle: 'Follow the incidental adrenal mass algorithm to determine the appropriate ACR White Paper recommendation.',
+  subtitle: 'Follow the adrenal mass algorithm to determine the appropriate ACR White Paper recommendation.',
   rootPath: ADRENAL_ROOT_PATH,
+  defaultId: 35,
   options: [
     {
       id: 1,
-      prompt: 'Incidental adrenal mass detected on CT',
-      // linkOptionIds: [2, 3, 4],
+      prompt: 'Incidental Adrenal Mass Detected on CT or MR',
+      linkOptionIds: [2, 3]
     },
     {
       id: 2,
-      prompt: '<1 cm',
-      // linkOptionIds: [5, 6]
+      prompt: '<1cm',
+      linkOptionIds: [4]
     },
     {
       id: 3,
-      prompt: '1.0 - 1.5 cm',
-      // linkOptionIds: [7, 8, 9, 19]
+      prompt: '≥1cm',
+      linkOptionIds: [5, 6]
     },
     {
       id: 4,
-      prompt: '>1.5 cm',
+      prompt: 'No Follow Up',
       // linkOptionIds: [7, 10, 19]
     },
     {
       id: 5,
-      prompt: 'Low-risk patient',
-      // noteIds: [2],
-      // linkOptionIds: [11]
+      prompt: 'Diagnostic Benign Imaging Features',
+      noteIds: [2],
+      linkOptionIds: [24]
     },
     {
       id: 6,
-      prompt: 'High-risk patient',
+      prompt: 'Indeterminate Imaging Features',
       // noteIds: [3],
-      // linkOptionIds: [12]
+      linkOptionIds: [7, 8]
     },
     {
       id: 7,
-      prompt: 'Benign imaging features',
+      prompt: '≥1 - <4cm',
       // noteIds: [5],
-      // linkOptionIds: [11]
+      linkOptionIds: [11, 12, 13]
     },
     {
       id: 8,
-      prompt: 'Suspicious imaging features',
+      prompt: '≥4cm',
       // noteIds: [6],
-      // linkOptionIds: [13]
+      linkOptionIds: [9, 10]
     },
     {
       id: 9,
-      prompt: '"Flash-filling" imaging feature',
-      // noteIds: [7],
-      // linkOptionIds: [5, 16]
+      prompt: 'No Cancer History',
+      linkOptionIds: [32]
     },
     {
       id: 10,
-      prompt: 'Suspicious or "Flash-filling" imaging features',
-      // noteIds: [6, 7],
-      // linkOptionIds: [15, 17]
+      prompt: 'Positive Cancer History',
+      linkOptionIds: [20]
     },
     {
       id: 11,
-      prompt: 'Benign, no further follow-up',
+      prompt: 'Prior Imaging',
+      linkOptionIds: [14, 15]
     },
     {
       id: 12,
-      prompt: 'Follow-up MRI in 3-6 months',
+      prompt: 'No Prior Imaging, No Cancer History',
       // noteIds: [4]
+      linkOptionIds: [17, 21]
     },
     {
       id: 13,
-      prompt: 'Hepatic MRI now'
+      prompt: 'No Prior Imaging, Positive Cancer History and Isolated Adrenal Mass',
+      linkOptionIds: [22]
     },
     {
       id: 14,
-      prompt: 'Hepatic MRI now or biopsy'
+      prompt: 'Stable ≥1 year',
       // noteIds: [8, 9]
+      linkOptionIds: [16]
     },
     {
       id: 15,
-      prompt: 'Low-risk patient',
+      prompt: 'New or Enlarging',
       // noteIds: [2],
-      // linkOptionIds: [18]
+      linkOptionIds: [33, 10]
     },
     {
       id: 16,
-      prompt: 'High-risk patient',
+      prompt: 'Benign, No Follow Up',
       // noteIds: [3],
       // linkOptionIds: [13]
     },
     {
       id: 17,
-      prompt: 'High-risk patient',
+      prompt: '1 - 2cm',
       // noteIds: [3],
-      // linkOptionIds: [14]
+      linkOptionIds: [18]
     },
     {
       id: 18,
-      prompt: 'Hepatic MRI now',
-      // noteIds: [8]
+      prompt: 'Probably Benign Consider 12 month follow up adrenal CT',
+      // noteIds: [1]
     },
     {
       id: 19,
-      prompt: 'Indeterminate imaging features',
+      prompt: 'Consider Follow Up Adrenal CT or Resection',
+      // noteIds: [3],
+      // linkOptionIds: [13]
+    },
+    {
+      id: 20,
+      prompt: 'Consider Bx or PET-CT',
+      // noteIds: [1]
+      // linkOptionIds: [13]
+    },
+    {
+      id: 21,
+      prompt: '>2cm, <4cm',
+      // noteIds: [1],
+      linkOptionIds: [22]
+    },
+    {
+      id: 22,
+      prompt: 'Recommend Adrenal Mass CT Protocol',
+      noteIds: [4],
+      // linkOptionIds: [13]
+    },
+    {
+      id: 23,
+      prompt: 'Non Contrast CT ≤10 HU',
+      // noteIds: [1],
+      linkOptionIds: [24]
+    },
+    {
+      id: 24,
+      prompt: 'Benign Adenoma, No Follow Up',
+      noteIds: [1],
+      // linkOptionIds: [13]
+    },
+    {
+      id: 25,
+      prompt: 'Non Contrast CT >10 HU',
+      // noteIds: [1],
+      linkOptionIds: [27, 28, 29]
+    },
+    {
+      id: 26,
+      prompt: 'Adrenal CT Washout',
       // noteIds: [1],
       // linkOptionIds: [13]
+    },
+    {
+      id: 27,
+      prompt: 'No enhancement = Cyst or Hemorrhage',
+      // noteIds: [1],
+      linkOptionIds: [16]
+    },
+    {
+      id: 28,
+      prompt: 'Absolute % Washout ≥60%, Relative % washout ≥40%',
+      noteIds: [5],
+      linkOptionIds: [24]
+    },
+    {
+      id: 29,
+      prompt: 'Absolute % Washout <60%, Relative % washout <40%',
+      noteIds: [5],
+      linkOptionIds: [31]
+    },
+    {
+      id: 30,
+      prompt: 'Benign, No Follow Up',
+      // noteIds: [1],
+      // linkOptionIds: [13]
+    },
+    {
+      id: 31,
+      prompt: 'Imaging Follow Up, Bx, PET-CT, or resection depending on clinical scenario.',
+      noteIds: [3],
+      // linkOptionIds: [13]
+    },
+    {
+      id: 32,
+      prompt: 'Consider Resection',
+      noteIds: [3]
+    },
+    {
+      id: 33,
+      prompt: 'No Cancer History',
+      linkOptionIds: [19]
+    },
+    {
+      id: 34,
+      prompt: 'Positive Cancer History',
+      linkOptionIds: []
+    },
+    {
+      id: 35,
+      linkOptionIds: [1, 36]
+    },
+    {
+      id: 36,
+      prompt: 'Non Incidental Adrenal Mass CT Protocol',
+      linkOptionIds: [23, 25]
     }
+    // {
+    //   id: 37,
+    //   prompt: 'Non Incidental',
+    //   linkOptionIds: [1]
+    // }
   ],
   notes: [
     {
       id: 1,
-      body: 'If inadequate imaging is available to ascertain the presence of benign versus suspicious features in a ≥1-cm lesion, prompt MRI is advised.'
+      body: 'Consider biochemical assays to determine functional status.'
     },
     {
       id: 2,
-      body: '<p>No known primary malignancy, hepatic dysfunction, or hepatic risk factors.</p><p>Hepatic Risk Factors:</p><div>Hepatitis</div><div>NASH</div><div>Alcoholism</div><div>PSC</div><div>PBC</div><div>Choledochal cysts</div><div>Hemochromatosis and other hereditary hepatic conditions</div><div>Anabolic steroid use</div>'
+      body: '<p>Myelolipoma, no enhancement, calcifications = Benign</p><p>≤10 HU or ↓ signal on chemical shift MR = Benign adenoma.</p>'
     },
     {
       id: 3,
-      body: '<p>Known primary malignancy with a propensity to metastasize to the liver, cirrhosis, and/or hepatic risk factors.</p><p>Hepatic Risk Factors:</p><div>Hepatitis</div><div>NASH</div><div>Alcoholism</div><div>PSC</div><div>PBC</div><div>Choledochal cysts</div><div>Hemochromatosis and other hereditary hepatic conditions</div><div>Anabolic steroid use</div>'
+      body: 'Consider biochemical assays to determine functional status and exclude pheochromocytoma before biopsy/resection.'
     },
     {
       id: 4,
-      body: 'May need more immediate follow-up in some scenarios. CT is also acceptable in a patient with cancer who is due for routine CT surveillance.'
+      body: 'May consider chemical-shift MRI.'
     },
     {
       id: 5,
-      body: '<p>Sharp margin, homogeneous low attenuation (20 Hounsfield units [HU]) on noncontrast and/or portal venous–phase imaging.</p><p>Characteristic features of hemangiomas, focal nodular hyperplasia, focal fatty sparing or deposition, or perfusional changes.</p><p>If pseudoenhancement is present, a benign cyst may measure >20 HU; radiologists\' discretion is necessary.</p>'
-    },
-    {
-      id: 6,
-      title: 'Suspicious Features',
-      body: '<p>Ill-defined margins, heterogeneous density, mural thickening or nodularity, thick septa, and intermediate to high attenuation on portal venous–phase imaging (>20 HU, in the absence of pseudoenhancement).</p><p>If pre and postcontrast CT is available, enhancement >20 HU is a suspicious feature.</p>'
-    },
-    {
-      id: 7,
-      title: 'Flash-filling',
-      body: '<p>Uniform hyperenhancement relative to hepatic parenchyma on arterial-phase (including late arterial/early portal venous–phase) postcontrast imaging.</p><p>If additional postcontrast phases are available to characterize lesion as benign (eg, hemangioma) or suspicious (eg, hepatocellular carcinoma), the lesion should be placed in one of those respective categories and not here.</p>'
-    },
-    {
-      id: 8,
-      body: '<p>Incidental hepatic lesions that are >1.5 cm and do not have benign features should at least undergo prompt MRI. Direct biopsy (without MRI) may be appropriate in some scenarios.</p><p>Differentiation of FNH from adenoma is important, especially if larger than 3 cm and subcapsular in location; for such patients, MRI with gadoxetate disodium is advised.</p>'
-    },
-    {
-      id: 9,
-      body: 'If biopsy is pursued, core biopsy is preferred over fine-needle aspiration.'
+      body: '<p>APW: dynamic enhanced (HU) - delayed (HU)  / dynamic enhanced (HU) - unenhanced (HU)</p><p>RPW: dynamic enhanced (HU) - delayed (HU)  / dynamic enhanced HU</p>'
     }
   ]
 };

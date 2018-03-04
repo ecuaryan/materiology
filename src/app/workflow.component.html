@@ -3,7 +3,7 @@
     <mat-card-title class="accent-text">{{title}}</mat-card-title>
     <mat-card-subtitle class="push-right">{{subtitle}}</mat-card-subtitle>
     <div style="margin-bottom: 30px;">
-        <mat-chip-list>
+        <mat-chip-list *ngIf="selectedOption.prompt">
             <button mat-raised-button [disabled]="isBackButtonDisabled()" style="margin-right: 30px;" (click)="goBack()">
                 <i class="material-icons">keyboard_arrow_left</i>
             </button>
@@ -12,7 +12,7 @@
     </div>
     <span  *ngFor="let option of availableOptions">
         <span *ngIf="option.linkOptionIds">
-            <span style="margin: 30px;">
+            <span class="button-icon-grouping">
                 <a mat-raised-button color="accent" [routerLink]="['/' + workflow.rootPath + '/' + option.id]">{{option.prompt}}</a>
                 <i *ngIf='option.notes' class="material-icons note-dialog" (click)="openNotesDialog(option.prompt, option.notes)">help_outline</i>
             </span>

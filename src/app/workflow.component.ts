@@ -26,7 +26,9 @@ export class WorkflowComponent implements OnInit {
       this.subtitle = this.workflow.subtitle;
       this.route.paramMap.subscribe(paramMap => {
         let id = +paramMap.get('id');
-        if (!id) {
+        if (!id && this.workflow.defaultId) {
+          id = this.workflow.defaultId;
+        } else if (!id) {
           id = 1;
         }
         this.selectedOption = this.workflow.options.find( option => option.id === id);
@@ -71,7 +73,7 @@ export class WorkflowComponent implements OnInit {
 
   isBackButtonDisabled() {
     return this.location.isCurrentPathEqualTo('/' + this.workflow.rootPath)
-    || this.location.isCurrentPathEqualTo('/' + this.workflow.rootPath + '/1');
+    || this.location.isCurrentPathEqualTo('/' + this.workflow.rootPath + '/' + this.workflow.defaultId ? this.workflow.defaultId : 1);
   }
 
   openNotesDialog(title, notes) {
