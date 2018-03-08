@@ -13,6 +13,10 @@ export class AppComponent {
 
   pages: Array<any> = [
     {
+      path: '',
+      viewText: 'HOME'
+    },
+    {
       path: '/ti-rads',
       viewText: 'TI-RADS'
     },

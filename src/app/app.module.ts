@@ -2,9 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, Router } from '@angular/router'; // PreloadAllModules
+// import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TiRadComponent } from './ti-rad.component';
 import { WorkflowComponent } from './workflow.component';
+import { HomeComponent } from './home.component';
+import { SubscribeComponent } from './subscribe/subscribe.component';
 import { MaterialModule } from './material.module';
 import { SimpleDialogComponent } from './simple-dialog.component';
 import { FormsModule } from '@angular/forms';
@@ -23,10 +26,13 @@ const appRoutes: Routes = [
   ADRENAL_ROUTES[1],
   {
     path: '',
-    redirectTo: LIVER_WORKFLOW.rootPath,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    component: HomeComponent
   },
-  // { path: '**', component: PageNotFoundComponent }
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({
@@ -35,7 +41,9 @@ const appRoutes: Routes = [
     SimpleDialogComponent,
     UtilComponent,
     TiRadComponent,
-    WorkflowComponent
+    WorkflowComponent,
+    HomeComponent,
+    SubscribeComponent
   ],
   entryComponents: [
     SimpleDialogComponent,
@@ -53,6 +61,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule
+    // HttpClientModule
   ],
   providers: [
     UtilComponent
