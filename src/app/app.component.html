@@ -1,6 +1,6 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
-    <a class="link-container" *ngFor="let page of pages" [routerLink]="page.path" (click)="sidenav.toggle()" routerLinkActive="active">
+    <a class="link-container" *ngFor="let page of pages" [routerLink]="page.path" (click)="sidenav.toggle()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <span>{{page.viewText}}</span>
       <!-- <i class="material-icons" style="float:right;">menu</i> -->
       <i class="material-icons checked-icon">radio_button_checked</i>
