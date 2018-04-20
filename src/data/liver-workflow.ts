@@ -11,7 +11,7 @@ export const LIVER_WORKFLOW = {
     {
       id: 1,
       prompt: 'Incidental liver mass detected on CT',
-      linkOptionIds: [2, 3, 4],
+      linkOptionIds: [2, 3, 4]
     },
     {
       id: 2,

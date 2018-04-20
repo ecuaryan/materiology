@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { UtilComponent } from './util.component';
 import { LIVER_WORKFLOW, LIVER_ROUTES } from '../data/liver-workflow';
 import { ADRENAL_WORKFLOW, ADRENAL_ROUTES } from '../data/adrenal-workflow';
+import { RENAL_WORKFLOW, RENAL_ROUTES } from '../data/renal-workflow';
 
 const appRoutes: Routes = [
   {
@@ -24,6 +25,8 @@ const appRoutes: Routes = [
   LIVER_ROUTES[1],
   ADRENAL_ROUTES[0],
   ADRENAL_ROUTES[1],
+  RENAL_ROUTES[0],
+  RENAL_ROUTES[1],
   {
     path: '',
     pathMatch: 'full',

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { UtilComponent } from './util.component';
 import { LIVER_VIEW_TEXT, LIVER_ROOT_PATH } from '../data/liver-workflow';
 import { ADRENAL_VIEW_TEXT, ADRENAL_ROOT_PATH } from '../data/adrenal-workflow';
+import { RENAL_VIEW_TEXT, RENAL_ROOT_PATH } from '../data/renal-workflow';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,10 @@ export class AppComponent {
     {
       path: ADRENAL_ROOT_PATH,
       viewText: ADRENAL_VIEW_TEXT
+    },
+    {
+      path: RENAL_ROOT_PATH,
+      viewText: RENAL_VIEW_TEXT
     }
   ];
 
@@ -42,6 +47,7 @@ export class AppComponent {
                       <li>3. Hoang JK, Langer JE, Middleton WD, Wu CC, Hammers LW, Cronan JJ, Tessler FN, Grant EG, Berland LL. Managing incidental thyroid nodules detected on imaging: white paper of the ACR Incidental Thyroid Findings Committee. Journal of the American College of Radiology : JACR. 12 (2): 143-50. <a class="muted-text"  href="https://doi.org/10.1016/j.jacr.2014.09.038" target="_blank">doi:10.1016/j.jacr.2014.09.038</a> - <a class="muted-text"  href="https://www.ncbi.nlm.nih.gov/pubmed/25456025" target="_blank">Pubmed</a></li>
                       <li>4. Gore RM, Pickhardt PJ, Mortele KJ, Fishman EK, Horowitz JM, Fimmel CJ, Talamonti MS, Berland LL, Pandharipande PV. Management of Incidental Liver Lesions on CT: A White Paper of the ACR Incidental Findings Committee. J Am Coll Radiol. 2017 Nov; 14(11):1429-1437. Epub 2017 Sep 18. <a class="muted-text" href="https://doi.org/10.1016/j.jacr.2017.07.018" target="_blank">https://doi.org/10.1016/j.jacr.2017.07.018</a></li>
                       <li>5. Mayo-Smith WW, Song JH, Boland GL, Francis IR, Israel GM, Mazzaglia PJ, Berland LL, Pandharipande PV. Management of Incidental Adrenal Masses: A White Paper of the ACR Incidental Findings Committee. J Am Coll Radiol. 2017 Aug;14(8):1038-1044. <a class="muted-text" href="https://doi.org/10.1016/j.jacr.2017.05.001" target="_blank">https://doi.org/10.1016/j.jacr.2017.05.001</a></li>
+                      <li>6. Herts, B.R., Silverman, S.G., Hindman, N.M. Management of the incidental renal mass on CT: A white paper of the ACR incidental findings Committee. J. Am. Coll. Radiol. 2017; DOI: <a class="muted-text" href="https://doi.org/10.1016/j.jacr.2017.04.028" target="_blank">doi.org/10.1016/j.jacr.2017.04.028</a></li>
                     </ul>`,
       rightButtonText: 'close'
     };

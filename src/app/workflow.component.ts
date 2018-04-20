@@ -82,7 +82,7 @@ export class WorkflowComponent implements OnInit {
       if (note.title && notes.length > 1) {
         noteElements += '<p><strong>' + note.title + ':</strong></p>';
       }
-      noteElements += '<div>' + note.body + '</div>';
+      noteElements += '<p>' + note.body + '</p>';
     });
 
     const settings = {
