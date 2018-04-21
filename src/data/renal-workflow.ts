@@ -220,13 +220,13 @@ export const RENAL_WORKFLOW = {
     },
     {
       id: 41,
-      prompt: 'No Morphologic change: <5 years of stability',
+      prompt: 'No morphologic change: <5 years of stability',
       noteIds: [20, 21],
       linkOptionIds: [44]
     },
     {
       id: 42,
-      prompt: 'No Morphologic change: ≥5 years of stability',
+      prompt: 'No morphologic change: ≥5 years of stability',
       noteIds: [20, 21],
       linkOptionIds: [14]
     },
@@ -346,11 +346,11 @@ export const RENAL_WORKFLOW = {
     },
     {
       id: 7,
-      body: 'Thin or inperceptible wall, no mural nodule septa or calcification.'
+      body: 'Thin or imperceptible wall, no mural nodule, septa, or calcification.'
     },
     {
       id: 8,
-      body: 'Thick or irregular wall, mural nodule septa or calcification.'
+      body: 'Thick or irregular wall, mural nodule, septa, or calcification.'
     },
     {
       id: 9,
