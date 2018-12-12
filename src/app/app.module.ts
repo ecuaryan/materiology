@@ -15,6 +15,7 @@ import { UtilComponent } from './util.component';
 import { LIVER_WORKFLOW, LIVER_ROUTES } from '../data/liver-workflow';
 import { ADRENAL_WORKFLOW, ADRENAL_ROUTES } from '../data/adrenal-workflow';
 import { RENAL_WORKFLOW, RENAL_ROUTES } from '../data/renal-workflow';
+import { PANCREAS_WORKFLOW, PANCREAS_ROUTES } from '../data/pancreas-workflow';
 
 const appRoutes: Routes = [
   {
@@ -27,6 +28,8 @@ const appRoutes: Routes = [
   ADRENAL_ROUTES[1],
   RENAL_ROUTES[0],
   RENAL_ROUTES[1],
+  PANCREAS_ROUTES[0],
+  PANCREAS_ROUTES[1],
   {
     path: '',
     pathMatch: 'full',

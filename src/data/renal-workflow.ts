@@ -204,7 +204,7 @@ export const RENAL_WORKFLOW = {
     },
     {
       id: 38,
-      prompt: 'Bosniak IIF on Followup Multiphase CT or MRI',
+      prompt: 'Bosniak IIF on Follow-up Multiphase CT or MRI',
       noteIds: [17],
       linkOptionIds: [41, 42, 43]
     },
@@ -216,7 +216,7 @@ export const RENAL_WORKFLOW = {
     },
     {
       id: 40,
-      prompt: 'Followup multiphase CT or MRI at 6 and 12 months, then yearly for 5 years'
+      prompt: 'Follow-up multiphase CT or MRI at 6 and 12 months, then yearly for 5 years'
     },
     {
       id: 41,
@@ -279,12 +279,12 @@ export const RENAL_WORKFLOW = {
     },
     {
       id: 52,
-      prompt: 'Followup multiphase CT or MRI',
+      prompt: 'Follow-up multiphase CT or MRI',
       linkOptionIds: [54, 55, 57]
     },
     {
       id: 53,
-      prompt: 'Followup multiphase CT or MRI beginning at 6 and 12 months, then yearly for 5 years'
+      prompt: 'Follow-up multiphase CT or MRI beginning at 6 and 12 months, then yearly for 5 years'
     },
     {
       id: 54,

@@ -4,6 +4,7 @@ import { UtilComponent } from './util.component';
 import { LIVER_VIEW_TEXT, LIVER_ROOT_PATH } from '../data/liver-workflow';
 import { ADRENAL_VIEW_TEXT, ADRENAL_ROOT_PATH } from '../data/adrenal-workflow';
 import { RENAL_VIEW_TEXT, RENAL_ROOT_PATH } from '../data/renal-workflow';
+import { PANCREAS_VIEW_TEXT, PANCREAS_ROOT_PATH } from '../data/pancreas-workflow';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +33,10 @@ export class AppComponent {
     {
       path: RENAL_ROOT_PATH,
       viewText: RENAL_VIEW_TEXT
+    },
+    {
+      path: PANCREAS_ROOT_PATH,
+      viewText: PANCREAS_VIEW_TEXT
     }
   ];
 
