@@ -246,7 +246,7 @@ export const PANCREAS_WORKFLOW = {
       id: 43,
       prompt: 'Cyst is ≥1.5cm',
       // noteIds: [20, 21],
-      linkOptionIds: []
+      linkOptionIds: [67, 68]
     },
     {
       id: 44,
@@ -378,7 +378,7 @@ export const PANCREAS_WORKFLOW = {
       id: 68,
       prompt: 'Main pancreatic duct communication absent or cannot be determined',
       // noteIds: [2],
-      linkOptionIds: []
+      linkOptionIds: [87, 97]
     },
     {
       id: 69,
@@ -433,7 +433,7 @@ export const PANCREAS_WORKFLOW = {
     },
     {
       id: 78,
-      prompt: 'Cyst is still >2.5cm',
+      prompt: 'Cyst is >2.5cm',
       linkOptionIds: [17]
     },
     {
@@ -475,6 +475,76 @@ export const PANCREAS_WORKFLOW = {
     {
       id: 86,
       prompt: 'EUS/FNA can be preformed instead of follow-up imaging.'
+    },
+    {
+      id: 87,
+      prompt: '1.5 - 2.5cm cyst',
+      linkOptionIds: [89, 90]
+    },
+    {
+      id: 89,
+      prompt: 'Initial scan',
+      linkOptionIds: [91]
+    },
+    {
+      id: 90,
+      prompt: 'Follow-up scan',
+      linkOptionIds: [92, 94]
+    },
+    {
+      id: 91,
+      prompt: 'Reimage q6mo x 4, then q1y x 2 then q2y x 3 STOP if stable over 10 years',
+      noteIds: [2]
+    },
+    {
+      id: 92,
+      prompt: 'Stable',
+      linkOptionIds: [93]
+    },
+    {
+      id: 93,
+      prompt: 'Since initial scan - Reimage q6mo x 4, then q1y x 2 then q2y x 3 STOP if stable over 10 years',
+      noteIds: [2]
+    },
+    {
+      id: 94,
+      prompt: 'Interval growth',
+      linkOptionIds: [95, 15],
+      noteIds: [1, 2]
+    },
+    {
+      id: 95,
+      prompt: 'Cyst is ≤2.5cm',
+      linkOptionIds: [96]
+    },
+    {
+      id: 96,
+      prompt: 'Reimage q6mo x 2 then q1y x 5 then q2y OR EUS/FNA STOP if cyst <2.5cm over 10 years',
+      noteIds: [2]
+    },
+    {
+      id: 97,
+      prompt: 'EUS/FNA',
+      linkOptionIds: [98, 99]
+    },
+    {
+      id: 98,
+      prompt: 'SCA, cPNET, pseudocyst',
+      linkOptionIds: [100]
+    },
+    {
+      id: 99,
+      prompt: 'Mucinous cyst or indeterminate aspiration',
+      linkOptionIds: [101]
+    },
+    {
+      id: 100,
+      prompt: 'Management dependent on diagnosis'
+    },
+    {
+      id: 101,
+      prompt: 'Reimage q6mo x 4, then q1y x 2, then q2y x 3 STOP if stable over 10 years. If interval growth recommend surgical consultation.',
+      noteIds: [1]
     }
   ],
   notes: [
